@@ -240,7 +240,9 @@ Route::prefix('vendors')->middleware('vendor.auth')->group(function () {
 
 
     Route::get('userlist', [UserController::class, 'userlist'])->name('users.list');
+
     Route::post('userdetail', [UserController::class, 'userdetails'])->name('user.detail');
+
     //Route::post('statusupdate', [UserController::class, 'statusupdate'])->name('users.statusupdate');
 
 });
