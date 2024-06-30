@@ -171,6 +171,8 @@ class LoginController extends Controller
         $productId = $request->product_id;
         $quantity = $request->quantity;
 
+        //test
+
         $cart = session()->get('cart', []);
 
         // Update the quantity for the specified product
