@@ -19,4 +19,9 @@ class Productcategory extends Model
     }
     return $nameIdArr;
   }
+
+  public function vendorProducts()
+  {
+      return $this->hasMany(VendorProduct::class, 'product_category_id');
+  }
 }

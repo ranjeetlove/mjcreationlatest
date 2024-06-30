@@ -26,13 +26,13 @@
                             <span><i class="fa fa-twitter-square"></i></span>
                             <span><i class="fa fa-linkedin"></i></span>
                         </div>
-                        <div class="log-sign">
+                        {{-- <div class="log-sign">
                             @if (request()->segment(2) == 'home')
                                 <a href="{{ route('users-login') }}" style="color:white">profile</a>
                             @else
                                 <a href="{{ route('users-login') }}" style="color:white">Login</a>/Signup
                             @endif
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -44,42 +44,80 @@
     <div class="container">
         <div class="row py-2">
             <div class="col-lg-3">
-                <img src="{{ asset('img/logo.png') }}" class="img-fluid logo" /><span class="title">Mj Creation</span>
+                <a wire:navigate href="{{ url('users/home') }}">
+                    <img src="{{ asset('img/logo.png') }}" class="img-fluid logo" />
+                    <span class="title">Mj Creation</span>
+                </a>
             </div>
             <div class="col-lg-9 mt-3">
-                <div class="m-item account">
+                <div class="m-item account d-flex align-items-center">
                     <div class="mx-3 deliver-text">
                         <span>Deliver to <i class="fa fa-map-marker"></i>
-                            <b>Noida, up</b></span>
+                            <b>Noida, UP</b>
+                        </span>
                     </div>
                     <div class="search-container mx-3 search">
                         <input type="text" class="search-input" placeholder="Search..." />
-                        <!-- <i class="fa fa-search"></i> -->
                     </div>
-                    <div class="whish mx-3">
-                        <i class="fa fa-heart-o mx-2"></i>
-                        <i class="fa fa-shopping-cart mx-2"></i>
-                        <span>Cart</span>
-                        <span>
-                            <div class="dropdown nav-dropdown">
+                    <div class="whish mx-3 d-flex align-items-center">
+                        <a wire:navigate href="{{ route('wishlist.view') }}" >
+                            <i class="fa fa-heart-o mx-2">wishlist</i>
+                        </a>
+                        <a class="dropdown-item"  wire:navigate href="{{ route('product-cart') }}">
+                            <i class="fa fa-shopping-cart mx-2"></i>
+                            <span>Cart</span>
+                            <span id="cart-count">
+                                @if (session('cart'))
+                                    {{ count(session('cart')) }}
+                                @else
+                                    0
+                                @endif
+                            </span>
+                        </a>
+                        @auth
+                            <div class="dropdown nav-dropdown mx-3">
+
                                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    My Account
+                                    {{ auth()->user()->name }}
                                 </button>
+
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">My Profile</a>
+                                    </li>
+
                                     <li>
                                         <a class="dropdown-item" href="#">Refund & Exchange</a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+
+
+
                                 </ul>
                             </div>
-                        </span>
+                        @else
+                            <a wire:navigate href="{{ route('users-login') }}" class="btn">Login/Signup </a>
+                        @endauth
+
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 <section class="menu-bg">
     <div class="container">
         <div class="row">

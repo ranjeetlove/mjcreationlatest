@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'phone_no',
+        'otp',
+        'otp_created_at',
         'phone_verified_at',
         'email_verified_at',
         'password',
@@ -44,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
 }

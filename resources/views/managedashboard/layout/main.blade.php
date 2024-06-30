@@ -179,8 +179,6 @@
         });
 
 
-
-        console.log("hello");
         setTimeout(function() {
             $('#error-message').addClass('fade-out');
         }, 2000);

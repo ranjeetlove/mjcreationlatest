@@ -7,11 +7,16 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/customer/customer.html">
-                <i class="ti-pie-chart menu-icon"></i>
-                <span class="menu-title">Customers</span>
-            </a>
+
+            <a class="nav-link {{ Route::is('users.list') ? 'active' : '' }}"
+            @if (!Route::is('users.list')) wire:navigate  href="{{ route('users.list') }}" @else href="javascript:void(0)" @endif>
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title"> Customers </span>
+        </a>
+
         </li>
+
+
         <li class="nav-item">
             <a class="nav-link" href="pages/vendors/vendor.html">
                 <i class="ti-star menu-icon"></i>
