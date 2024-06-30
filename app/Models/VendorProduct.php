@@ -97,5 +97,13 @@ class VendorProduct extends Model
     return $vendorProductCategories;
   }
 
+  public function productCategory()
+  {
+      return $this->belongsTo(ProductCategory::class, 'product_category_id');
+  }
 
+  public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class, 'vendor_product_id');
+    }
 }

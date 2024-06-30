@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\Auth\RegistrationController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\CommisionController;
+use App\Http\Controllers\User\Auth\RegistrationController;
 use App\Http\Controllers\Dashboard\ProductDiscountController;
-use App\Http\Controllers\Vendor\Auth\RegistrationController as VendorRegistrationController;
+use App\Http\Controllers\Dashboard\VendorOrderManagmentController;
 use App\Http\Controllers\Vendor\Auth\LoginController as VendorLoginController;
 use App\Http\Controllers\Dashboard\VendorController as DashboardVendorController;
-use App\Http\Controllers\Dashboard\CommisionController;
-use App\Http\Controllers\Dashboard\VendorOrderManagmentController;
-
-
-
+use App\Http\Controllers\Vendor\Auth\RegistrationController as VendorRegistrationController;
 
 
 
@@ -61,8 +59,39 @@ Route::post('users/authlogin', [LoginController::class, 'usersauthlogin'])->name
 
 Route::get('users/home', [LoginController::class, 'homeview'])->name('users-home-view');
 
+Route::get('product/detail/{id}', [LoginController::class, 'homedetail'])->name('product-detail');
+
+Route::get('product/cart', [LoginController::class, 'cartview'])->name('product-cart');
+
+Route::post('/add-to-cart', [LoginController::class, 'addToCart'])->name('add.to.cart');
+
+Route::post('/cart/remove', [LoginController::class, 'cartRemove'])->name('cart.remove');
+
+Route::get('product/checkout',[LoginController::class,'checkout'])->name('product-checkout');
+
+Route::get('product/wishlist', [LoginController::class, 'wishlistview'])->name('wishlist.view');
+
+Route::post('/add-to-wishlist', [LoginController::class, 'addToWishlist'])->name('add.to.wishlist');
+
+Route::delete('/wishlist/{id}', [LoginController::class, 'remove'])->name('wishlist.remove');
+
+Route::get('/product/list/{id}', [LoginController::class, 'productlist'])->name('product-list');
+
+Route::get('/products/sort', [LoginController::class, 'sort'])->name('products.sort');
+
+Route::post('/cart/update', [LoginController::class, 'updateCart'])->name('cart.update');
+
+Route::post('/cart/save-for-later', [LoginController::class, 'saveForLater'])->name('cart.saveForLater');
 
 
+
+
+
+
+
+
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
@@ -208,5 +237,10 @@ Route::prefix('vendors')->middleware('vendor.auth')->group(function () {
     Route::post('order-status-change', [VendorOrderManagmentController::class, 'orderstatuschange'])->name('vendors.orderstatuschange');
 
     Route::post('order-sendordershipment', [VendorOrderManagmentController::class, 'pushOderToShipment'])->name('vendors.sendordershipment');
+
+
+    Route::get('userlist', [UserController::class, 'userlist'])->name('users.list');
+    Route::post('userdetail', [UserController::class, 'userdetails'])->name('user.detail');
+    //Route::post('statusupdate', [UserController::class, 'statusupdate'])->name('users.statusupdate');
 
 });

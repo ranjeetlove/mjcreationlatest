@@ -14,6 +14,9 @@
                     <p class="text-center info">
                         Please enter the OTP sent to
                     </p>
+                    <p class="text-center success">
+                        Your OTP is  {{ $otp }}
+                    </p>
                     <p class="text-center">
 
                         {{ $user_contact }}
@@ -36,7 +39,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-center">
-                                        <div class="otp-countdown" id="timer-countdown">02:00</div>
+                                        <div class="otp-countdown" id="timer-countdown">02:00 </div>
                                     </div>
                                 </div>
                             </div>
@@ -57,12 +60,6 @@
                             <button type="submit" class="btn sbt-btn mt-3" id="otp_verify">
                                 Verify Otp
                             </button>
-
-
-
-
-
-
 
                             <p class="text-center"><b>Not received your code?</b></p>
                         </div>

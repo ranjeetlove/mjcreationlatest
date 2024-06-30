@@ -54,9 +54,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/mjcreationlatest'),
+    'url' => env('APP_URL', 'http://localhost:8000'),
 
-    'asset_url' => env('ASSET_URL', 'http://localhost/mjcreationlatest/public'),
+    'asset_url' => env('ASSET_URL', 'http://localhost:8000/'),
 
     /*
     |--------------------------------------------------------------------------

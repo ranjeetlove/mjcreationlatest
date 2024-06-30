@@ -174,7 +174,6 @@
 
 
     <section id="main_content">
-
         <div class="container my-5 ">
             <div class="row">
                 <div class="col-lg-4 left-box">
@@ -197,10 +196,6 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-
-
-
-
                         <!-- form -->
                         {{-- <div class="form-group">
                             <label for="login-mobile" class="font-weight-bold text-dark">Mobile</label>
@@ -209,16 +204,6 @@
                                     style="width:500px;">
                             </div>
                         </div> --}}
-
-
-
-
-
-
-
-
-
-
                         <br />
                         <div class="form-group">
                             <label for="userpassword"><b>Enter Your Password</b></label>
@@ -411,12 +396,7 @@
                                 $('#otp4').val(" ");
                                 $('#otp5').val(" ");
                                 $('#otp6').val(" ");
-
-
-
-
-
-
+                                toastr.success('Registeration successful!');
                                 window.location.href = "{{ url('users/home') }}";
 
 
@@ -507,11 +487,26 @@
 
             $('#otpsubmitbutton').on('click', function(e) {
                 e.preventDefault();
-
                 let userContact = $('#user_contact').val();
                 let password = $('#userpassword').val();
+                   // Check if user_contact is empty
+                if (!userContact.trim()) {
+                    toastr.error('Please enter your Mobile No./Email.');
+                    return; // Stop further execution
+                }
 
-                $.ajax({
+                // Check if userContact is a valid email or mobile number
+                if (!isValidEmail(userContact) && !isValidMobile(userContact)) {
+                    toastr.error('Please enter a valid email address or mobile number.');
+                    return; // Stop further execution
+                }
+
+                // Check if password is empty
+                if (!password.trim()) {
+                    toastr.error('Please enter your password.');
+                    return; // Stop further execution
+                }
+                    $.ajax({
                     url: "{{ route('users-registration') }}",
                     type: "POST",
                     data: {
@@ -530,33 +525,44 @@
 
                         $('#loader').html('');
                         $('#main_content').removeAttr('class', 'demo');
-
                         $('#main_content').html(data.responsehtml);
                         otpFieldScript();
                         otpLifeTime();
                         otpvarification();
 
 
-
-
-
                     },
                     error: (error) => {
+                        $('#loader').html('');
+                        $('#main_content').removeAttr('class', 'demo');
+                        // if (error.responseJSON.errormessage.phone_no) {
+                        //     toastr.error(error.responseJSON.errormessage.phone_no[0]);
+                        //     $('#loader').html('');
+                        //     $('#main_content').removeAttr('class', 'demo');
 
+                        // }
+
+
+                        // if (error.responseJSON.errormessage.email) {
+
+
+                        //     toastr.error(error.responseJSON.errormessage.email[0]);
+                        //     $('#loader').html('');
+                        //     $('#main_content').removeAttr('class', 'demo');
+                        // }
+
+                        if (error.responseJSON && error.responseJSON.errormessage) {
                         if (error.responseJSON.errormessage.phone_no) {
                             toastr.error(error.responseJSON.errormessage.phone_no[0]);
-                            $('#loader').html('');
-                            $('#main_content').removeAttr('class', 'demo');
-
                         }
-
-
                         if (error.responseJSON.errormessage.email) {
-
-
                             toastr.error(error.responseJSON.errormessage.email[0]);
-                            $('#loader').html('');
-                            $('#main_content').removeAttr('class', 'demo');
+                        }
+                        if (error.responseJSON.errormessage.password) {
+                            toastr.error(error.responseJSON.errormessage.password[0]);
+                        }
+                        } else {
+                            toastr.error('Something went wrong. Please try again.');
                         }
 
                     }
@@ -570,6 +576,23 @@
                 e.preventDefault();
                 let userContact = $('#user_contact').val();
                 let password = $('#userpassword').val();
+                   // Check if user_contact is empty
+                   if (!userContact.trim()) {
+                    toastr.error('Please enter your Mobile No./Email.');
+                    return; // Stop further execution
+                }
+
+                // Check if userContact is a valid email or mobile number
+                if (!isValidEmail(userContact) && !isValidMobile(userContact)) {
+                    toastr.error('Please enter a valid email address or mobile number.');
+                    return; // Stop further execution
+                }
+
+                // Check if password is empty
+                if (!password.trim()) {
+                    toastr.error('Please enter your password.');
+                    return; // Stop further execution
+                }
                 $.ajax({
                     url: "{{ route('users-auth-login') }}",
                     type: "POST",
@@ -588,39 +611,48 @@
                     success: (data) => {
                         $('#loader').html('');
                         $('#main_content').removeAttr('class', 'demo');
-
-
+                        toastr.success('Login successful!');
                         window.location.href = "{{ url('users/home') }}";
-
-
-
 
                     },
                     error: (xhr, status, error) => {
 
 
+                        // if (xhr.status == 422) {
+
+
+                        //     toastr.error(
+                        //         "Your account is not verified ,otp is send to your registered contact details"
+                        //     );
+                        //     $('#loader').html('');
+                        //     $('#main_content').removeAttr('class', 'demo');
+                        //     $('#main_content').html(xhr.responseJSON.responsehtml);
+                        //     otpFieldScript();
+                        //     otpLifeTime();
+                        //     otpvarification();
+
+                        // }
+                        // if (xhr.status == 401) {
+
+                        //     $('#loader').html('');
+                        //     $('#main_content').removeAttr('class', 'demo');
+                        //     toastr.error("Your are not authorized person");
+                        // }
+
+                        $('#loader').html('');
+                        $('#main_content').removeAttr('class', 'demo');
+
                         if (xhr.status == 422) {
-
-
-                            toastr.error(
-                                "Your account is not verified ,otp is send to your registered contact details"
-                            );
-                            $('#loader').html('');
-                            $('#main_content').removeAttr('class', 'demo');
+                            toastr.error("Your account is not verified. OTP is sent to your registered contact details.");
                             $('#main_content').html(xhr.responseJSON.responsehtml);
                             otpFieldScript();
                             otpLifeTime();
                             otpvarification();
-
+                        } else if (xhr.status == 401) {
+                            toastr.error("You are not an authorized person.");
+                        } else {
+                            toastr.error("An error occurred. Please try again later.");
                         }
-                        if (xhr.status == 401) {
-
-                            $('#loader').html('');
-                            $('#main_content').removeAttr('class', 'demo');
-                            toastr.error("Your are not authorized person");
-                        }
-
-
                     }
 
                 })
@@ -628,7 +660,17 @@
 
             })
 
+         // Function to validate email format
+        function isValidEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
 
+        // Function to validate mobile number format
+        function isValidMobile(mobile) {
+            const mobilePattern = /^[6-9]\d{9}$/;
+            return mobilePattern.test(mobile);
+        }
 
         });
     </script>

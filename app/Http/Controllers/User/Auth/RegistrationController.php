@@ -19,68 +19,54 @@ class RegistrationController extends Controller
 {
 
     public function register(Request $request){
-      
-
-        mergerequestoremailorphone_no($request);
 
 
+          mergerequestoremailorphone_no($request);
+            $validator = Validator::make($request->all(), [
+                'phone_no' => 'sometimes|required|string|max:255|unique:users,phone_no',
+                'email' => 'sometimes|required|string|email|max:255|unique:users,email',
+                'password' => 'required|string|min:8',
+                'user_contact'=>'required',
 
-        $validator = Validator::make($request->all(), [
-            'phone_no' => 'sometimes|required|string|max:255|unique:users,phone_no',
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8',
-            'user_contact'=>'required', 
+            ]);
 
-        ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'sucess'=>true,
+                    'errormessage'=>$validator->errors(),
+                ],422);
+            }
 
-
-
-        
-        if ($validator->fails()) {
-            return response()->json([
-                'sucess'=>true,
-                'errormessage'=>$validator->errors(),
-            ],422);
-        }
-
-    
-
-        $userData=User::create([
-
-            'email' => $request->email??Null,
-            'phone_no'=>$request->phone_no ?? NULL,
-            'password' => Hash::make($request->password),
-        ]);
-
-
-        if(isset($request->email)){
-            $otp = rand(100000,999999);
-
-           
-        
-            event(new Sendemailvarificationotp($otp,$userData));
-
-
-
-        }
-
-        if(isset($request->phone_no)){
 
             $otp = rand(100000,999999);
+            $userData=User::create([
 
-           
-        
-            event(new Sendphonevarificationotp($otp,$userData));
+                'email' => $request->email??Null,
+                'phone_no'=>$request->phone_no ?? NULL,
+                'password' => Hash::make($request->password),
+                'otp' => $otp,
+                'otp_created_at' => now(),
+            ]);
 
-        }
+
+            // if(isset($request->email)){
+            //     $otp = rand(100000,999999);
+            //     event(new Sendemailvarificationotp($otp,$userData));
+
+            // }
+
+            // if(isset($request->phone_no)){
+
+            //     $otp = rand(100000,999999);
+
+            //     event(new Sendphonevarificationotp($otp,$userData));
+
+            // }
 
 
+        $responsehtml=view::make('website.users.otpvarification',['user_contact'=>$request->user_contact,'user_id'=>$userData->id ,'otp'=>$userData->otp])->render();
 
-
-        $responsehtml=view::make('website.users.otpvarification',['user_contact'=>$request->user_contact,'user_id'=>$userData->id])->render();
-      
-
-        return response()->json([
+      return response()->json([
             'sucess'=>true,
             'responsehtml'=>$responsehtml
         ],200);
