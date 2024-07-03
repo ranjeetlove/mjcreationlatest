@@ -41,18 +41,29 @@
                             <div class="col-lg-3">
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                                        <img src="{{ asset('img/' . $product->product_banner_image) }}"
+                                        <img src="{{ asset('product/banner/' . $product->product_banner_image) }}"
                                             class="prod-img mb-2" /> <!-- Placeholder image -->
                                     </a>
                                     <span class="prod-title">{{ $product->product_title }}</span><br />
-                                    <span class="prod-title">₹{{ $product->product_measurment_quantity_price }}</span>
+
+                                    @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                        @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                            <span class="prod-title">₹{{ $priceDetail->price }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="prod-title">Price not available</span><br />
+                                    @endif
+
+
+
                                     <div class="d-flex justify-content-between py-2">
                                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
                                             @csrf
-                                            <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
+                                            <button type="submit" class="btn btn-prodadd addtocart"
+                                                data-id="{{ $product->id }}">Add to Cart</button>
                                         </form>
                                         <button class="btn btn-whishlist"
-                                                    data-product-id="{{ $product->id }}">Wishlist</button>
+                                            data-product-id="{{ $product->id }}">Wishlist</button>
                                     </div>
                                 </div>
                             </div>
@@ -202,17 +213,27 @@
                                         </a>
                                         <div class="poojam-card-body">
                                             <p>{{ $product->product_title }}</p>
-                                            <div class="rupee-div">
-                                                <img src="{{ asset('img/rupee-sign.png') }}"
-                                                    alt="rupee-sign" />{{ $product->product_measurment_quantity_price }}
-                                            </div>
+
+
+                                            @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                                @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                                    <div class="rupee-div">
+                                                        <img src="{{ asset('img/rupee-sign.png') }}"
+                                                            alt="rupee-sign" />{{ $priceDetail->price }}
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <span class="prod-title">Price not available</span><br />
+                                            @endif
                                             <div class="d-flex justify-content-between py-2">
-                                                <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                                                <form method="POST" action="{{ route('add.to.cart') }}"
+                                                    class="add-to-cart-form">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
+                                                    <button type="submit" class="btn btn-prodadd addtocart"
+                                                        data-id="{{ $product->id }}">Add to Cart</button>
                                                 </form>
                                                 <button class="btn btn-whishlist"
-                                                            data-product-id="{{ $product->id }}">Wishlist</button>
+                                                    data-product-id="{{ $product->id }}">Wishlist</button>
                                             </div>
                                         </div>
                                     </div>
@@ -250,17 +271,25 @@
                                     </a>
                                     <div class="poojam-card-body">
                                         <p>{{ $product->product_title }}</p>
-                                        <div class="rupee-div">
-                                            <img src="{{ asset('img/rupee-sign.png') }}"
-                                                alt="rupee-sign" />{{ $product->product_measurment_quantity_price }}
-                                        </div>
+                                        @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                            @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                                <div class="rupee-div">
+                                                    <img src="{{ asset('img/rupee-sign.png') }}"
+                                                        alt="rupee-sign" />{{ $priceDetail->price }}
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <span class="prod-title">Price not available</span><br />
+                                        @endif
                                         <div class="d-flex justify-content-between py-2">
-                                            <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                                            <form method="POST" action="{{ route('add.to.cart') }}"
+                                                class="add-to-cart-form">
                                                 @csrf
-                                                <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
+                                                <button type="submit" class="btn btn-prodadd addtocart"
+                                                    data-id="{{ $product->id }}">Add to Cart</button>
                                             </form>
                                             <button class="btn btn-whishlist"
-                                                        data-product-id="{{ $product->id }}">Wishlist</button>
+                                                data-product-id="{{ $product->id }}">Wishlist</button>
                                         </div>
                                     </div>
                                 </div>

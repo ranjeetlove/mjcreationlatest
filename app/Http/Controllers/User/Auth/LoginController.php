@@ -16,6 +16,7 @@ use App\Events\Sendemailvarificationotp;
 use App\Events\Sendphonevarificationotp;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductPriceDetail;
 
 class LoginController extends Controller
 {
@@ -112,15 +113,18 @@ class LoginController extends Controller
     public function homeview()
     {
 
-        $datalist = ProductCategory::with('vendorProducts')->take(4)->get();
+        $datalist = ProductCategory::with('vendorProducts.productMeasurmentPriceDeatils')->take(4)->get();
 
-        $datalistafter = ProductCategory::with('vendorProducts')
+        $datalistafter = ProductCategory::with('vendorProducts.productMeasurmentPriceDeatils')
             ->orderBy('created_at', 'desc')
             ->skip(4)
             ->take(PHP_INT_MAX)
             ->get();
-        // Get the top 10 most viewed products
-        $mostViewedProducts = VendorProduct::orderBy('id', 'desc')->take(10)->get();
+        // Get the top 6 most viewed products
+        $mostViewedProducts = VendorProduct::with('productMeasurmentPriceDeatils')
+                                       ->orderBy('id', 'desc')
+                                       ->take(6)
+                                       ->get();
         // Get all banner data
         $banner = Discount::take(4)->get();
 
