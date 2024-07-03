@@ -120,12 +120,10 @@ class LoginController extends Controller
             ->skip(4)
             ->take(PHP_INT_MAX)
             ->get();
-        // Get the top 6 most viewed products
         $mostViewedProducts = VendorProduct::with('productMeasurmentPriceDeatils')
                                        ->orderBy('id', 'desc')
-                                       ->take(6)
+                                       ->take(4)
                                        ->get();
-        // Get all banner data
         $banner = Discount::take(4)->get();
 
         return view('website.home', compact('datalist', 'datalistafter', 'mostViewedProducts', 'banner'));

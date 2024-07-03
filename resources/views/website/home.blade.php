@@ -64,7 +64,7 @@
                 </div>
                 <div class="row gx-5">
                     @if ($category->vendorProducts->count() > 0)
-                        @foreach ($category->vendorProducts as $product)
+                        @foreach ($category->vendorProducts->take(4) as $product)
                             <div class="col-lg-3">
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
