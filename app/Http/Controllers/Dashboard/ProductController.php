@@ -44,10 +44,6 @@ class ProductController extends Controller
 
         $product_category = Productcategory::where('parent_id', $request->selectedvalue)->get();
 
-
-
-
-
         if (json_decode($product_category) != []) {
             $optionHtml = "<option selected disabled>Open this select menu</option>";
         } else {
@@ -60,9 +56,6 @@ class ProductController extends Controller
             $optionHtml = $optionHtml . "<option value='" . $data->id . "'>" . ucwords($data->name) . "</option>";
         }
 
-
-
-
         $htmlResponse = '<div class="col-md-4" id="' . $request->selectedtext . '">
             <label for="" class="form-label"> ' . $request->selectedtext . ' ' . 'Category</label>
             <select onchange="selectSubproductcategory(this)" id="select' . $request->selectedtext . '" class="form-select product_category_main"
@@ -70,7 +63,7 @@ class ProductController extends Controller
 
             . $optionHtml .
             '</select>
-    
+
                 </div>';
 
         return response()->json([
@@ -85,9 +78,6 @@ class ProductController extends Controller
 
     public function saveproduct(Request $request)
     {
-
-
-
 
         DB::beginTransaction();
 
@@ -112,6 +102,8 @@ class ProductController extends Controller
                 'product_specification.*.heading' => 'required',
 
                 'product_specification.*.detail' => 'required',
+               'product_color.*' => 'nullable', // optional validation for product colors
+               'product_color_banner_image.*' => 'nullable|image', // optional validation for product color banner images
 
 
 
@@ -126,23 +118,29 @@ class ProductController extends Controller
                 'product_specification.*.detail' => 'Product Specification detail required',
 
                 'product_specification.*.heading' => 'Specification heading field is required',
+                'product_color.*.nullable' => 'Product color name required',
+                'product_color_banner_image.*.nullable' => 'Product color banner image required',
+                'product_color_banner_image.*.image' => 'Each product color banner image must be an image file',
             ]);
+
+
 
             $validator->after(function ($validator) use ($request) {
                 $productColors = $request->input('product_color', []);
                 $productColorBannerImages = $request->file('product_color_banner_image', []);
 
-                if (count($productColors) !== count($productColorBannerImages)) {
-                    $validator->errors()->add('product_color', 'The number of product colors must match the number of product color banner images.');
-                }
+                if (!empty(array_filter($productColors)) && !empty($productColorBannerImages)) {
+                    if (count($productColors) !== count($productColorBannerImages)) {
+                        $validator->errors()->add('product_color', 'The number of product colors must match the number of product color banner images.');
+                    }
 
-                foreach ($productColorBannerImages as $index => $image) {
-                    if (!isset($productColors[$index]) || empty($productColors[$index])) {
-                        $validator->errors()->add('product_color.' . $index, 'Each product color banner image must have a corresponding product color Name.');
+                    foreach ($productColorBannerImages as $index => $image) {
+                        if (!isset($productColors[$index]) || empty($productColors[$index])) {
+                            $validator->errors()->add('product_color.' . $index, 'Each product color banner image must have a corresponding product color name.');
+                        }
                     }
                 }
             });
-
 
             if ($validator->fails()) {
                 return response()->json([
@@ -372,7 +370,7 @@ class ProductController extends Controller
         $productImport = new VendorProductImport();
         Excel::import($productImport, $request->file('import_product_file'));
 
-        // dd($productImport->response);  
+        // dd($productImport->response);
 
         return response()->json($productImport->response);
     }
@@ -386,7 +384,7 @@ class ProductController extends Controller
         $productImport = new ProductSpecificationImport();
         Excel::import($productImport, $request->file('import_product_specification_file'));
 
-        // dd($productImport->response);  
+        // dd($productImport->response);
 
         return response()->json($productImport->response);
 
@@ -402,7 +400,7 @@ class ProductController extends Controller
         $productImport = new ProductPrimaryCostImport();
         Excel::import($productImport, $request->file('import_product_primary_cost_data_file'));
 
-        // dd($productImport->response);  
+        // dd($productImport->response);
 
         return response()->json($productImport->response);
 

@@ -767,17 +767,17 @@
                                     <img src="{{ asset('img/imagepreviewupload.jpg') }}">
                                     <div>
                                         <span>+</span>
-                                       
+
                                     </div>
                                     <div>
                                     <span class="btn btn-danger justify-content-center" style="font-size:unset !important ;margin-top: 45px;" onclick="removeElement('imagecontainer${multipelimageId}',${multipelimageId})">-</span>
                                </div>
                                     </label>
 
-                                
-                                      
-                                    
-                              
+
+
+
+
                             </div>`;
 
             $(`#product_gallery`).append(imageHTML);
@@ -814,17 +814,17 @@
                                             <img src="{{ asset('img/imagepreviewupload.jpg') }}">
                                             <div>
                                                 <span>+</span>
-                                               
+
                                             </div>
                                             <div>
                                             <span class="btn btn-danger justify-content-center" style="font-size:unset !important ;margin-top: 45px;" onclick="removeElement('imagecontainer${containerColorId}${multiplcolorimageId}')">-</span>
                                        </div>
                                             </label>
 
-                                        
-                                              
-                                            
-                                      
+
+
+
+
                                     </div>`;
 
 
@@ -868,7 +868,7 @@
                                             <span id="product_color.${addMoreImagefordiffentcolorContainerId}" style="color: red;"></span>
                                            </div>
 
-                                       
+
 
 
 
@@ -876,7 +876,7 @@
                                      <div class="col-md-12 px-5 d-flex justify-content-end">
                                       <span class="btn btn-success btn-sm px-3" id="" onclick="addMoreColorImage(${addMoreImagefordiffentcolorContainerId})">+</span>
                             </div>
-                           
+
 
                            <div class="row">
                          <div class="col-md-12 pl-2">
@@ -1001,11 +1001,11 @@
                         <div class="col-md-12 px-5 d-flex justify-content-end">
                         <span class="btn btn-danger btn-sm px-3" onclick="removeElement('morediscountcontainer${discountcontainer}')">-</span>
                     </div>
-                        
-                        
+
+
                         </div>
-                     
-                        
+
+
                         `;
 
             $("#product_dicount_container").append(discontHTML);
@@ -1044,26 +1044,26 @@
                             <span id="product_specification.${productspecification}.heading" style="color: red;"></span>
                             </div>
                           <div class="col-md-6 px-5 mt-5" >
-                          
+
                             <label for="product_specfication${productspecification}" class="form-label">Name</label>
                             <input type="text" name="product_specification[${productspecification}][name]" class="form-control"
                                 id="product_specfication${productspecification}" autocompvare="off">
                                 <span id="product_specification.${productspecification}.name" style="color: red;"></span>
                         </div>
-                        
+
                         <div class="col-md-12 px-5">
-                           
+
                             <label for="product_specification_details${productspecification}" class="form-label">Detail</label>
                             <div class="form-floating">
                             <textarea class="form-control" name="product_specification[${productspecification}][detail]" placeholder="Leave a comment here"
                                 id="product_specification_details${productspecification}" style="height: 100px"></textarea>
                                 <span id="product_specification.${productspecification}.detail" style="color: red;"></span>
                                 </div>
-                        
+
                         <div class="col-md-12 px-5 d-flex justify-content-end">
                         <span class="btn btn-danger btn-sm px-3" onclick="removeElementSpecfication('productspecification${productspecification}')">-</span>
                     </div>
-                        
+
 
                     </div>`;
 
@@ -1112,11 +1112,11 @@
                                         </div>
 
                                         <div class="col-md-2 py-3">
-                                            
-                                               
+
+
                                                     <span class="btn btn-danger btn-sm px-3" onclick="removeElement('colorstockcontainer${colorStockContainerIndex}')">-</span>
-                                                    
-                                         
+
+
                                         </div></div>`;
             $('#colorstock').append(colorStcokHtml);
 
@@ -1129,7 +1129,7 @@
         function addNewMoreColorStockMeasurmentFiled(colorStockIndex) {
 
             newColorStockIndex++;
-            var colorNewStockHtml = `  
+            var colorNewStockHtml = `
             <div class="row" id="colorstockcontainer${colorStockIndex}${newColorStockIndex}">
             <div class="col-md-5 py-3">
                                             <label for="product_color_type${colorStockIndex}${newColorStockIndex}" class="form-label">Select color
@@ -1146,11 +1146,11 @@
                                                 class="form-control" id="product_stock_quantity${colorStockIndex}${newColorStockIndex}" autocompvare="off">
                                         </div>
 
-                                        
+
                                             <div class="col-md-2 py-3">
-                                               
+
                                                     <span class="btn btn-danger btn-sm px-3" onclick="removeElement('colorstockcontainer${colorStockIndex}${newColorStockIndex}')">-</span>
-                                        
+
                                         </div>`;
             $(`#newcolorstockcontainer${colorStockIndex}`).append(colorNewStockHtml);
 

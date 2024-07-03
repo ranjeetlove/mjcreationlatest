@@ -80,6 +80,7 @@ class VendorProduct extends Model
   }
 
 
+
   public function discounts()
   {
     return $this->belongsToMany(Discount::class, 'product_discounts')

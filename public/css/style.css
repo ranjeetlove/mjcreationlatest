@@ -252,6 +252,7 @@ ul {
   margin-bottom: 0.3rem;
   font-size: 16px;
   letter-spacing: 0.025em;
+  min-height: 41px;
 }
 .prod-title a{
   text-decoration: none;

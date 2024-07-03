@@ -58,24 +58,30 @@
                     <div class="prod-collection mt-5 mb-2">
                         <h5>{{ $category->name }}</h5>
                         <a class="btn view-more-btn" href="{{ route('product-list', ['id' => $category->id]) }}" id="product-list-link">
-                            View more 
+                            View more
                         </a>
                     </div>
                 </div>
                 <div class="row gx-5">
                     @if ($category->vendorProducts->count() > 0)
-                        @foreach ($category->vendorProducts as $product)
+                        @foreach ($category->vendorProducts->take(4) as $product)
                             <div class="col-lg-3">
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                                         <div class="prodcut-img-outer-box">
                                         <img src="{{ asset('img/' . $product->product_banner_image) }}"
                                         class="prod-img mb-2" />
-                                         </div>    
+                                         </div>
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
-                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
+                                    @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                    @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                    <span class="prod-title prodcut-price">₹{{ $priceDetail->price }} </span>
+                                    @endforeach
+                                    @else
+                                    <span class="prod-title prodcut-price">₹ --</span><br />
+                                    @endif
                                     <div class="d-flex justify-content-between py-2">
                                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
                                             @csrf
@@ -87,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         @endforeach
                     @else
                         <div class="col-md-12 text-center">
@@ -122,11 +128,17 @@
                                         <div class="prodcut-img-outer-box">
                                         <img src="{{ asset('img/' . $product->product_banner_image) }}"
                                         class="prod-img mb-2" />
-                                         </div>    
+                                         </div>
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
-                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
+                                    @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                    @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                    <span class="prod-title prodcut-price">₹{{ $priceDetail->price }} </span>
+                                    @endforeach
+                                    @else
+                                    <span class="prod-title prodcut-price">₹ --</span><br />
+                                    @endif
                                     <div class="d-flex justify-content-between py-2">
                                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
                                             @csrf
@@ -167,11 +179,17 @@
                                         <div class="prodcut-img-outer-box">
                                         <img src="{{ asset('img/' . $product->product_banner_image) }}"
                                         class="prod-img mb-2" />
-                                         </div>    
+                                         </div>
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
-                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
+                                    @if ($product->productMeasurmentPriceDeatils->isNotEmpty())
+                                    @foreach ($product->productMeasurmentPriceDeatils as $priceDetail)
+                                    <span class="prod-title prodcut-price">₹{{ $priceDetail->price }} </span>
+                                    @endforeach
+                                    @else
+                                    <span class="prod-title prodcut-price">₹ --</span><br />
+                                    @endif
                                     <div class="d-flex justify-content-between py-2">
                                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
                                             @csrf
