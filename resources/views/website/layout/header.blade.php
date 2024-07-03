@@ -2,38 +2,25 @@
     <div class="container">
         <div class="row">
             <div class="top-content">
-                <div class="col-lg-8">
+                <div class="col-12 col-sm-8">
                     <div class="wel-header">
                         <span>Welcome Visitor!</span>
                         <span>Contact with us</span>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="top-right">
-                        <div class="dropdown top-dropdown">
-                            <button class="btn dropdown-toggle tog-btn" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                English
-                            </button>
-                            <ul class="dropdown-menu top-dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Hindi</a></li>
-                                <li><a class="dropdown-item" href="#">Hibru</a></li>
-                            </ul>
-                        </div>
-                        <div class="top-media">
-                            <span><i class="fa fa-instagram"></i></span>
-                            <span><i class="fa fa-facebook-f"></i></span>
-                            <span><i class="fa fa-twitter-square"></i></span>
-                            <span><i class="fa fa-linkedin"></i></span>
-                        </div>
-                        {{-- <div class="log-sign">
-                            @if (request()->segment(2) == 'home')
-                                <a href="{{ route('users-login') }}" style="color:white">profile</a>
-                            @else
-                                <a href="{{ route('users-login') }}" style="color:white">Login</a>/Signup
-                            @endif
-                        </div> --}}
-                    </div>
+                <div class="col-12 col-sm-2">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+                    <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
+                    <a href="https://www.twitter.com" target="_blank" class="fa fa-twitter"></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="fa fa-linkedin"></a>
+                </div>
+                </div>
+                <div class="col-12 col-sm-2">
+                    <select class="form-select" id="languageSelect">
+                        <option selected>English</option>
+                        <option value="Hindi">Hindi</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -44,37 +31,47 @@
     <div class="container">
         <div class="row py-2">
             <div class="col-lg-3">
-                <a wire:navigate href="{{ url('users/home') }}">
+                <a wire:navigate href="{{ url('users/home') }}" class="headerLogo">
                     <img src="{{ asset('img/logo.png') }}" class="img-fluid logo" />
-                    <span class="title">Mj Creation</span>
+                    <span class="title">MJ Creation</span>
                 </a>
             </div>
-            <div class="col-lg-9 mt-3">
-                <div class="m-item account d-flex align-items-center">
+            <div class="col-lg-9 mt-2">
+                <div class=" account d-flex">
                     <div class="mx-3 deliver-text">
                         <span>Deliver to <i class="fa fa-map-marker"></i>
                             <b>Noida, UP</b>
                         </span>
                     </div>
                     <div class="search-container mx-3 search">
-                        <input type="text" class="search-input" placeholder="Search..." />
+                       <div class="search-box">
+                            <input type="text" placeholder="Search...">
+                            <i class="fa fa-search search-icon"></i>
+                        </div>
                     </div>
-                    <div class="whish mx-3 d-flex align-items-center">
+                    <div class="whishCart mx-3">
                         <a wire:navigate href="{{ route('wishlist.view') }}" >
-                            <i class="fa fa-heart-o mx-2">wishlist</i>
+                           <div class="wishlist-icon">
+                             <i class="fa fa-heart mx-2"></i>
+                             <span class="wishlist-count">3</span>
+                            </div>
+                            <span>wishlist</span>
                         </a>
-                        <a class="dropdown-item"  wire:navigate href="{{ route('product-cart') }}">
+                        <a wire:navigate href="{{ route('product-cart') }}">
+                        <div class="cart-icon">
                             <i class="fa fa-shopping-cart mx-2"></i>
-                            <span>Cart</span>
-                            <span id="cart-count">
+                            <span class="cart-count">
                                 @if (session('cart'))
                                     {{ count(session('cart')) }}
                                 @else
                                     0
                                 @endif
                             </span>
+                            </div>
+                            <span>cart</span>
                         </a>
-                        @auth
+                    </div>
+                    @auth
                             <div class="dropdown nav-dropdown mx-3">
 
                                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -108,9 +105,6 @@
                         @else
                             <a wire:navigate href="{{ route('users-login') }}" class="btn">Login/Signup </a>
                         @endauth
-
-                    </div>
-
                 </div>
             </div>
         </div>
