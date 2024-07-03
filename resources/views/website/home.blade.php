@@ -3,13 +3,38 @@
 @section('content')
     <!-- Banner Section -->
     <section>
-        <div class="container-fluid">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+        @if ($banner->count() > 0)
+                @foreach ($banner as $index => $item)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $index }}" class="{{ $index === 0 ? 'active' : '' }}" aria-current="true" aria-label="Slide {{ $index }}"></button>
+                @endforeach
+        @endif
+        </div>
+        <div class="carousel-inner">
+        @if ($banner->count() > 0)
+                @foreach ($banner as $index => $item)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <img src="{{ asset('uploads/banner/' . $item->banner_image) }}" class="d-block w-100" alt="banner image" />
+                    </div>
+                @endforeach
+        @endif
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </div>
+        <!-- <div class="container-fluid">
             <div class="owl-carousel owl-theme" id="home-owl-carousel">
                 @if ($banner->count() > 0)
                     @foreach ($banner as $item)
                         <div class="item">
-                            <!--<img src="{{ asset($item->banner_image) }}" alt="banner image" />-->
-                            <img src="{{ asset('img/mhbanner.png') }}" alt="banner image" />
+                            <img src="{{ asset('uploads/banner/' . $item->banner_image) }}" alt="banner image" />
                         </div>
                     @endforeach
                 @else
@@ -18,22 +43,24 @@
                     </div>
                 @endif
             </div>
-        </div>
+        </div> -->
     </section>
 
-    <section class="">
-        <div class="container prod-sec">
+    <section class="product-listing">
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-4"></div>
+            </div>
+        </div> -->
+        <div class="container">
             @foreach ($datalist as $category)
                 <div class="row">
-                    <div class="prod-collection mt-5">
+                    <div class="prod-collection mt-5 mb-2">
                         <h5>{{ $category->name }}</h5>
-
-                        <a href="{{ route('product-list', ['id' => $category->id]) }}" id="product-list-link">
-                            <h5>View more <i class="fas fa-long-arrow-alt-right"></i></h5>
+                        <a class="btn view-more-btn" href="{{ route('product-list', ['id' => $category->id]) }}" id="product-list-link">
+                            View more 
                         </a>
-
                     </div>
-                    <hr />
                 </div>
                 <div class="row gx-5">
                     @if ($category->vendorProducts->count() > 0)
@@ -41,21 +68,26 @@
                             <div class="col-lg-3">
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        <div class="prodcut-img-outer-box">
                                         <img src="{{ asset('img/' . $product->product_banner_image) }}"
-                                            class="prod-img mb-2" /> <!-- Placeholder image -->
+                                        class="prod-img mb-2" />
+                                         </div>    
                                     </a>
-                                    <span class="prod-title">{{ $product->product_title }}</span><br />
-                                    <span class="prod-title">₹{{ $product->product_measurment_quantity_price }}</span>
+                                    <div class="product-content">
+                                    <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
+                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
                                     <div class="d-flex justify-content-between py-2">
                                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
                                             @csrf
-                                            <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
+                                            <button type="submit" class="btn btn-prodadd addtocart w-100" data-id="{{ $product->id }}">Add to Cart</button>
                                         </form>
                                         <button class="btn btn-whishlist"
-                                                    data-product-id="{{ $product->id }}">Wishlist</button>
+                                            data-product-id="{{ $product->id }}">Wishlist</button>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         @endforeach
                     @else
                         <div class="col-md-12 text-center">
@@ -75,115 +107,6 @@
         </div>
     </section>
     <!--------------Start  Other---------->
-
-    {{-- <section class="my-5">
-    <div class="container">
-      <div class="poojam-sec">
-        <h5>Pooja Materials</h5>
-      </div>
-      <div class="carousel-wrap">
-        <div class="owl-carousel" id="poojamCarousel">
-          <div class="poojam-item">
-            <div class="poojam-card">
-              <img
-                src="./img/Rectangle44.png"
-                class="mcard-img"
-                alt="Rectangle29"
-              />
-              <div class="poojam-card-body">
-                <p>Lakshmi Kuber Puja Combo Kit / Pack</p>
-                <div class="rupee-div">
-                  <img src="./img/rupee-sign.png" alt="rupee-sign" />100
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <button class="btn btn-prodadd">Add to Cart</button>
-                  <button class="btn btn-whishlist">Wishlist</button>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="poojam-item">
-            <div class="poojam-card">
-              <img
-                src="./img/imagew1.png"
-                class="mcard-img"
-                alt="Rectangle30"
-              />
-              <div class="poojam-card-body">
-                <p>Lakshmi Kuber Puja Combo Kit / Pack</p>
-                <div class="rupee-div">
-                  <img src="./img/rupee-sign.png" alt="rupee-sign" />100
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <button class="btn btn-prodadd">Add to Cart</button>
-                  <button class="btn btn-whishlist">Wishlist</button>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="poojam-item">
-            <div class="poojam-card">
-              <img
-                src="./img/Rectangle46.png"
-                class="mcard-img"
-                alt="Rectangle31"
-              />
-              <div class="poojam-card-body">
-                <p>Lakshmi Kuber Puja Combo Kit / Pack</p>
-                <div class="rupee-div">
-                  <img src="./img/rupee-sign.png" alt="rupee-sign" />100
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <button class="btn btn-prodadd">Add to Cart</button>
-                  <button class="btn btn-whishlist">Wishlist</button>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="poojam-item">
-            <div class="poojam-card">
-              <img
-                src="./img/image-23.png"
-                class="mcard-img"
-                alt="Rectangle31"
-              />
-              <div class="poojam-card-body">
-                <p>Lakshmi Kuber Puja Combo Kit / Pack</p>
-                <div class="rupee-div">
-                  <img src="./img/rupee-sign.png" alt="rupee-sign" />100
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <button class="btn btn-prodadd">Add to Cart</button>
-                  <button class="btn btn-whishlist">Wishlist</button>
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="poojam-item">
-            <div class="poojam-card">
-              <img
-                src="./img/image-24.png"
-                class="mcard-img"
-                alt="Rectangle31"
-              />
-              <div class="poojam-card-body">
-                <p>Lakshmi Kuber Puja Combo Kit / Pack</p>
-                <div class="rupee-div">
-                  <img src="./img/rupee-sign.png" alt="rupee-sign" />100
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <button class="btn btn-prodadd">Add to Cart</button>
-                  <button class="btn btn-whishlist">Wishlist</button>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-
     @foreach ($datalistafter as $category)
         <section class="my-5">
             <div class="container">
@@ -194,27 +117,24 @@
                     <div class="owl-carousel" id="poojamCarousel">
                         @if ($category->vendorProducts->count() > 0)
                             @foreach ($category->vendorProducts as $product)
-                                <div class="poojam-item">
-                                    <div class="poojam-card">
-                                        <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                                            <img src="{{ asset('img/' . $product->product_banner_image) }}"
-                                                class="mcard-img" alt="{{ $product->product_title }}" />
-                                        </a>
-                                        <div class="poojam-card-body">
-                                            <p>{{ $product->product_title }}</p>
-                                            <div class="rupee-div">
-                                                <img src="{{ asset('img/rupee-sign.png') }}"
-                                                    alt="rupee-sign" />{{ $product->product_measurment_quantity_price }}
-                                            </div>
-                                            <div class="d-flex justify-content-between py-2">
-                                                <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
-                                                </form>
-                                                <button class="btn btn-whishlist"
-                                                            data-product-id="{{ $product->id }}">Wishlist</button>
-                                            </div>
-                                        </div>
+                            <div class="prod-box">
+                                    <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        <div class="prodcut-img-outer-box">
+                                        <img src="{{ asset('img/' . $product->product_banner_image) }}"
+                                        class="prod-img mb-2" />
+                                         </div>    
+                                    </a>
+                                    <div class="product-content">
+                                    <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
+                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                                            @csrf
+                                            <button type="submit" class="btn btn-prodadd addtocart w-100" data-id="{{ $product->id }}">Add to Cart</button>
+                                        </form>
+                                        <button class="btn btn-whishlist"
+                                            data-product-id="{{ $product->id }}">Wishlist</button>
+                                    </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -242,29 +162,26 @@
                 <div class="owl-carousel" id="viewspCarousel">
                     @if ($mostViewedProducts->count() > 0)
                         @foreach ($mostViewedProducts as $product)
-                            <div class="poojam-item">
-                                <div class="poojam-card">
+                                <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                                        <div class="prodcut-img-outer-box">
                                         <img src="{{ asset('img/' . $product->product_banner_image) }}"
-                                            class="prod-img mb-2" /> <!-- Placeholder image -->
+                                        class="prod-img mb-2" />
+                                         </div>    
                                     </a>
-                                    <div class="poojam-card-body">
-                                        <p>{{ $product->product_title }}</p>
-                                        <div class="rupee-div">
-                                            <img src="{{ asset('img/rupee-sign.png') }}"
-                                                alt="rupee-sign" />{{ $product->product_measurment_quantity_price }}
-                                        </div>
-                                        <div class="d-flex justify-content-between py-2">
-                                            <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
-                                                @csrf
-                                                <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
-                                            </form>
-                                            <button class="btn btn-whishlist"
-                                                        data-product-id="{{ $product->id }}">Wishlist</button>
-                                        </div>
+                                    <div class="product-content">
+                                    <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->product_title }}</a></h3>
+                                    <span class="prod-title prodcut-price">₹{{ $product->product_measurment_quantity_price }} </span>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                                            @csrf
+                                            <button type="submit" class="btn btn-prodadd addtocart w-100" data-id="{{ $product->id }}">Add to Cart</button>
+                                        </form>
+                                        <button class="btn btn-whishlist"
+                                            data-product-id="{{ $product->id }}">Wishlist</button>
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
                         @endforeach
                     @else
                         <div class="col-md-12 text-center">

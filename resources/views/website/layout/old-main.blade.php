@@ -7,41 +7,147 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @livewireStyles
+
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/owl.theme.green.css')}} "/>
     <link rel="stylesheet" href="{{ asset('css/style.css')}}" />
-    <link rel="stylesheet" href="{{ asset('website-assets/css/style.css')}}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/toaster.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" media="screen" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('fontawesome/font-awesome.min.css') }}" type="text/css" media="screen" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}" type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="{{ asset('css/fontgoogleapis.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('fontawesome/font-awesome.w3.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {{-- <link rel="stylesheet" href="{{ asset('css/font-awesome.4.7.0.css') }}" type="text/css" media="screen" /> --}}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/maps/style.css.map') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/adminstyle.css') }}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/font-awesome.w3.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendorcss/ti-icons/css/themify-icons.css') }}">
+
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables/boostrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables/boostrap5.css') }}">
+
+
+    <link href="{{ asset('css/bootstrap.5.0.2.min.css') }}" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toaster.min.css') }}">
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+
+
+
+    {{-- <script src="{{ asset('js/jquery.js') }}"></script>
+
+    <script src="{{ asset('js/toaster.min.js') }}"></script>
+    <script src="{{ asset('graph/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('js/documentation.js') }}"></script>
+    <script src="{{ asset('js/file-upload.js') }}"></script>
+    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('js/tabs.js') }}"></script>
+
+    <script src="{{ asset('js/todolist.js') }}"></script>
+    <script src="{{ asset('js/tooltips.js') }}"></script>
+    <script src="{{ asset('js/off-canvas.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/jquery.validation.min.js') }}"></script>
+    <script src="{{ asset('js/additional.method.js') }}"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('tailwindcss/tailwind.js') }}"></script>
+    <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('js/addproduct.js') }}"></script> --}}
+
+    {{-- <script src="{{ asset('js/datatable.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/datatables/datatables2.0.5.js') }}"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> --}}
+    {{-- <script src="{{ asset('js/datatables/boostrap5.js') }}"></script> --}}
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+
+    <script src="{{ asset('graph/Chart.min.js') }}"></script>
+    <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('js/documentation.js') }}"></script>
+    <script src="{{ asset('js/file-upload.js') }}"></script>
+    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('js/tabs.js') }}"></script>
+
+    <script src="{{ asset('js/todolist.js') }}"></script>
+    <script src="{{ asset('js/tooltips.js') }}"></script>
+    <script src="{{ asset('js/off-canvas.js') }}"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/jquery.validation.min.js') }}"></script>
+    <script src="{{ asset('js/additional.method.js') }}"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('js/addproduct.js') }}"></script> --}}
+    <script src="{{ asset('js/datatable.js') }}"></script>
+    <script src="{{ asset('js/datatables/datatables2.0.5.js') }}"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> --}}
+    <script src="{{ asset('js/datatables/boostrap5.js') }}"></script>
+
+    {{-- <script src="{{ asset('js/bootstrap5.0.2.bundle.min.js') }}"></script> --}}
+    <script src="{{ asset('js/toaster.min.js') }}"></script>
+
+    {{-- <script type="module" src="{{ url('resources/js/app.js') }} "></script> --}}
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
     <title>@yield('title')</title>
 </head>
+
 <body class="">
 
+
+
+
+
     @include('website.layout.header')
+
     {{-- @livewire('livewire.managedashboard.layout.sidebar') --}}
+
     @yield('content')
+
     @include('website.layout.footer')
+
+
 
     <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
     @yield('page-script')
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/toaster.min.js') }}"></script>
+
+    <script src="{{ asset('js/template.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/jquery.min.js')}}"></script>
     <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
     <script src="{{ asset('js/script.js')}}"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
 <script>
     $(document).ready(function() {
@@ -85,7 +191,7 @@
             var sortBy = $(this).val();
             var categoryId = $(this).data('category-id');
             $.ajax({
-                url: '{{ route("products.sort") }}',
+                url: '{{ route("products.sort") }}', // Laravel route
                 method: 'GET',
                 data: { sort_by: sortBy ,category_id: categoryId },
                 success: function(response) {
@@ -121,7 +227,7 @@
         function updateCart(productId, quantity) {
             $.ajax({
                 type: 'POST',
-                url: '{{ route('cart.update') }}',
+                url: '{{ route('cart.update') }}', // Replace with your actual route for updating cart
                 data: {
                     _token: '{{ csrf_token() }}',
                     product_id: productId,
@@ -133,7 +239,10 @@
                     } else {
                         toastr.error(response.message);
                     }
+                    // Update quantity input display
                     $('.quantity-input[data-product-id="' + productId + '"]').val(quantity);
+
+                    // Update price details section
                     $('.price-details').html(`
                         <h5>PRICE DETAILS</h5>
                         <hr>
@@ -147,6 +256,7 @@
                 },
                 error: function(err) {
                     console.error('Error updating cart:', err);
+                    // Handle errors if any
                 }
             });
         }
@@ -161,7 +271,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('cart.saveForLater') }}',
+                url: '{{ route('cart.saveForLater') }}', // Replace with your actual route for saving for later
                 data: {
                     _token: '{{ csrf_token() }}',
                     product_id: productId
@@ -177,6 +287,7 @@
                 },
                 error: function(err) {
                     console.error('Error saving product for later:', err);
+                    // Handle errors if any
                 }
             });
         });
@@ -204,10 +315,14 @@
                 } else {
                     toastr.error(response.message);
                 }
+
+
             }
         });
     });
 });
 </script>
+
 </body>
+
 </html>

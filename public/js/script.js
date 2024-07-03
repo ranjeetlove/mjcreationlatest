@@ -1,8 +1,8 @@
 $("#home-owl-carousel").owlCarousel({
   autoplay: true,
-  autoplayTimeout: 2000,
+  autoplayTimeout: 5000,
   loop: true,
-  margin: 10,
+  margin: 0,
   nav: false,
   responsive: {
     0: {
