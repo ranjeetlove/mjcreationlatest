@@ -55,6 +55,7 @@ use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\FrontendController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
+
 use App\Http\Controllers\Front\WishlistController;
 /*
 |--------------------------------------------------------------------------
