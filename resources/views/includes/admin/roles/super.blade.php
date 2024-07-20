@@ -259,5 +259,26 @@
             <a href="{{ route('admin-role-index') }}" class=" wave-effect"><i class="fas fa-user-tag"></i>{{ __('Manage Roles') }}</a>
         </li> --}}
         <li>
+            <a href="#order" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false"><i class="fas fa-hand-holding-usd"></i>{{ __('Orders') }}</a>
+            <ul class="collapse list-unstyled" id="order" data-parent="#accordion" >
+                   <li>
+                    <a href="{{route('admin-order-index')}}"> {{ __('All Orders') }}</a>
+                </li>
+                <li>
+                    <a href="{{route('admin-order-pending')}}"> {{ __('Pending Orders') }}</a>
+                </li>
+                <li>
+                    <a href="{{route('admin-order-processing')}}"> {{ __('Processing Orders') }}</a>
+                </li>
+                <li>
+                    <a href="{{route('admin-order-completed')}}"> {{ __('Completed Orders') }}</a>
+                </li>
+                <li>
+                    <a href="{{route('admin-order-declined')}}"> {{ __('Declined Orders') }}</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
             <a href="{{ route('admin-cache-clear') }}" class=" wave-effect"><i class="fas fa-sync"></i>{{ __('Clear Cache') }}</a>
         </li>

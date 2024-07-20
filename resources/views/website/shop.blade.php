@@ -1,4 +1,3 @@
-
 @extends('website.layout.main')
 @section('title', 'Mjcreation')
 @section('content')
@@ -71,43 +70,40 @@
                         </select>
                     </div>
                     <div>
-                        <button class="btn btn-light"><i class="fas fa-th"></i></button>
-                        <button class="btn btn-light"><i class="fas fa-bars"></i></button>
+                        <button class="btn btn-light" id="grid-view-btn"><i class="fas fa-th"></i></button>
+                        <button class="btn btn-light" id="list-view-btn"><i class="fas fa-bars"></i></button>
                     </div>
                 </div>
             </div>
             <div class="row product-listing equal-height" id="productListings">
                 @if ($category->vendorProducts->count() > 0)
                 @foreach ($category->vendorProducts as $product)
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                                <img src="{{ asset('img/' . $product->product_banner_image) }}"
-                                    class="shop-pimage" /> <!-- Placeholder image -->
-                            </a>
+                    <div class="col-md-4 product-card">
+                        <a href="{{ route('product-detail', ['id' => $product->id]) }}">
+                            <img src="{{ asset('img/' . $product->product_banner_image) }}"
+                                class="shop-pimage" /> <!-- Placeholder image -->
+                        </a>
 
-                            <h5>{{ $product->product_title }}</h5>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="price">₹{{ $product->product_measurment_quantity_price }}</div>
-                                <div class="stock-status">IN STOCK</div>
-                            </div>
-                            <div class="rating my-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
-                                    @csrf
-                                    <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
-                                </form>
-                                <button class="btn btn-whishlist"
-                                            data-product-id="{{ $product->id }}">Wishlist</button>
-                            </div>
-
+                        <h5>{{ $product->product_title }}</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="price">₹{{ $product->product_measurment_quantity_price }}</div>
+                            <div class="stock-status">IN STOCK</div>
                         </div>
+                        <div class="rating-div">
+                                    <span>&#9733;</span>
+                                    <span>&#9733;</span>
+                                    <span>&#9733;</span>
+                                    <span>&#9733;</span>
+                                </div>
+                        <div class="d-flex justify-content-between">
+                            <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                                @csrf
+                                <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
+                            </form>
+                            <button class="btn btn-whishlist"
+                                        data-product-id="{{ $product->id }}">Wishlist</button>
+                        </div>
+
                     </div>
                 @endforeach
                 @else
@@ -120,3 +116,61 @@
     </div>
 </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#grid-view-btn').on('click', function() {
+        $('#productListings').removeClass('list-view').addClass('grid-view');
+    });
+
+    $('#list-view-btn').on('click', function() {
+        $('#productListings').removeClass('grid-view').addClass('list-view');
+    });
+});
+</script>
+
+<style>
+    /* Default grid view */
+.product-card {
+    margin-bottom: 30px;
+}
+
+/* List view */
+.list-view .product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-view .product-card img {
+    max-width: 150px;
+    margin-right: 20px;
+}
+
+.list-view .product-card h5 {
+    font-size: 1.5rem;
+}
+
+.grid-view .product-card {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.list-view .product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.list-view .product-card img {
+    max-width: 150px;
+    margin-right: 20px;
+}
+
+.list-view .product-card h5 {
+    font-size: 1.5rem;
+}
+</style>

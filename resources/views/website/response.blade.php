@@ -3,12 +3,12 @@
         <div class="col-md-4">
             <div class="product-card">
                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                        <img src="{{ asset('img/' . $product->product_banner_image) }}"
+                        <img src="{{ asset('img/' . $product->photo) }}"
                             class="shop-pimage" /> <!-- Placeholder image -->
                     </a>
                 <h5>{{ $product->product_title }}</h5>
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="price">₹{{ $product->product_measurment_quantity_price }}</div>
+                    <div class="price">₹{{ $product->price }}</div>
                     <div class="stock-status">IN STOCK</div>
                 </div>
                 <div class="rating my-3">
