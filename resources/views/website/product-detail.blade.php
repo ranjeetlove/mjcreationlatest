@@ -1,15 +1,98 @@
 @extends('website.layout.main')
 @section('title', 'Mjcreation')
 @section('content')
+<style>
+.payment-p{
+    font-size: 14px !important;
+}
+.credit-card{
+    font-size:16px !important
+}
+.paym{
+    border: 0.5px solid #E5E7EB;
+    border-radius: 5px;
+    padding: 10px;
+}
+.buy-now{
+    background-color:#243164;
+    font-size:12px;
+}
+.buy-now:hover{
+    background-color:#fff;
+    font-size:12px;
+    color:#000;
+    border:1px solid #243164
+}
+.prod-hr{
+    height:0.3px !important;
+}
+.main-image{
+    border:none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.thum-box{
+    border:none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.prod-gallery{
+    display:flex;
+    justify-content:space-between;
+}
+.product-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.counter-btn {
+    background-color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+}
+
+.counter-input {
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+    outline: none;
+}
+.product-title{
+    font-size:34px;
+}
+@media only screen and (max-width: 600px) {
+  .whish{
+    cursor: pointer;
+    display: block;
+    justify-content: space-between;
+    align-items: center !important;
+  }
+}
+</style>
     <section>
         <div class="container">
             <div class="row">
-                <span>Home > Dhoop Collection > Hari Darshan Deluxe Doop 20 Sticks</span>
+            <div class="breadcrum-div">
+                <ul class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Dhoop Collection</a></li>
+                  <li>Hari Darshan Deluxe Doop 20 Sticks</li>
+                </ul>
+              </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="main-image">
-                        <img src="{{ asset('assets/images/products/' . $product->photo) }}" title="{{ $product->name  }}"
+                        <img src="{{ asset('assets/images/products/' . $product->photo) }}" title="{{ $product->name }}"
                             class="" id="main-image" />
                     </div>
                     <div class="row mt-3">
@@ -35,44 +118,60 @@
                         <span>MRP :</span><span> ₹ {{ $product->price }}</span><span>
                             ₹23.00</span><span>2%off</span>
                     </div>
-                    <span>Availability: {{ $product->stock }} in stock</span>
-                    <div class="add-btn my-3">
-                        <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form">
+                    <span><b></b>Availability: {{ $product->stock }} in stock</b></span>
+                    <div class="add-btn add-btn1 my-3">
+                        <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form add-to-cart-form1 d-flex">
                             @csrf
-                            <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}">Add to Cart</button>
-                        </form>
-                        <button class="buy-now">
+                            <div class="product-counter">
+                            <button type="button" class="counter-btn minus-btn">-</button>
+                            <input type="text" class="counter-input" value="1" readonly>
+                            <button type="button" class="counter-btn plus-btn">+</button>
+                            </div>
+                            <button type="submit" class="btn btn-prodadd addtocart" data-id="{{ $product->id }}"><i class="fa fa-shopping-bag"></i> Add to Cart</button>
+                            <button class="buy-now">
                             <i class="fa fa-shopping-bag"></i> Buy Now
                         </button>
+                        </form>
+
                     </div>
 
                     <div class="paym">
                         <div class="paym1">
-                            <span class="c-card"><i class="fa fa-credit-card"></i></span>
+                            <span class="c-card"><i class="fa fa-credit-card credit-card"></i></span>
                             <div>
+                                <p class="payment-p">
                                 <b>Payment.</b>Payment upon receipt of goods, Payment by card
                                 in the department, Google Pay, Online card, -5% discount in
                                 case of payment
+                                </p>
+
                             </div>
                         </div>
-                        <hr />
+                        <hr class="prod-hr"/>
                         <div class="paym1">
-                            <span class="c-card"><i class="fa fa-credit-card"></i></span>
+                            <span class="c-card"><i class="fa fa-credit-card credit-card"></i></span>
                             <div>
+                            <p class="payment-p">
                                 <b>Warranty.</b> The Consumer Protection Act does not provide
                                 for the return of this product of proper quality.
+                               </p>
                             </div>
                         </div>
                     </div>
                     <div class="whish mt-3">
                         <div class="me-3">
-                            <span><i class="fa fa-heart-o"></i></span>Add to wishlist
+                            <span><img src="{{ asset('img/heart-icon.png') }}" alt="heart-icon" /></span>Add to wishlist
+                        </div>
+                        <div class="me-3 d-flex">
+                            <span><img src="{{ asset('img/share-icon.png') }}" alt="share-icon" /></span><div class="media-links">
+                        <span><i class="fa fa-instagram sc-icon"></i></span>
+                        <span><i class="fa fa-facebook-square sc-icon"></i></span>
+                        <span><i class="fa fa-twitter-square sc-icon"></i></span>
+                        <span><i class="fa fa-whatsapp sc-icon"></i></span>
+                    </div>
                         </div>
                         <div class="me-3">
-                            <span><i class="fa fa-share"></i></span>Share this Product
-                        </div>
-                        <div class="me-3">
-                            <span><i class="fa fa-retweet"></i></span>Compare
+                            <span><img src="{{ asset('img/compare-icon.png') }}" alt="compare-icon" /></span>Compare
                         </div>
                     </div>
                     <div class="mt-2">
@@ -116,7 +215,7 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        {!! $product->meta_description !!}
+                        {!! $product->discription !!}
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         Hari Darshan Deluxe Dhoop Sticks have a sweet and serene fragrance
@@ -151,7 +250,7 @@
                         <div class="col-lg-3">
                             <div class="prod-box">
                                 <a href="{{ route('product-detail', ['id' => $relatedproduct->id]) }}">
-                                    <img src="{{ asset('assets/images/products/' . $relatedproduct->photo) }}"
+                                    <img src="{{ asset('img/' . $relatedproduct->photo) }}"
                                         class="prod-img mb-2" />
                                 </a>
                                 <span class="prod-title">{{ $relatedproduct->name }}</span><br />

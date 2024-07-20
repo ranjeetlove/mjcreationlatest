@@ -1,6 +1,31 @@
 @extends('website.layout.main')
 @section('title', 'Mjcreation')
 @section('content')
+<style>
+    .remove{
+    background-color:#ff0000;
+    font-size:12px;
+    color:#fff;
+    border:none;
+}
+    .remove:hover{
+    background-color:#fff;
+    font-size:12px;
+    color:#000;
+    border:1px solid #243164
+}
+.save-for-later{
+    background-color:#243164;
+    color:#fff;
+    font-size:12px;
+}
+.save-for-later:hover{
+    background-color:#fff;
+    font-size:12px;
+    color:#000;
+    border:1px solid #243164;
+}
+</style>
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
@@ -22,7 +47,7 @@
                             <form action="{{ route('cart.remove') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                                <button type="submit" class="btn btn-outline-secondary ml-2">Remove</button>
+                                <button type="submit" class="btn btn-outline-secondary ml-2 remove">Remove</button>
                             </form>
                             <button class="btn btn-outline-secondary ml-2 save-for-later" data-product-id="{{ $item['id'] }}">Save for later</button>
                         </div>

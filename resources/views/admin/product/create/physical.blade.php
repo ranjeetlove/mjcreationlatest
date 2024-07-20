@@ -111,7 +111,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Sub Category') }}*</h4>
+																<h4 class="heading">{{ __('Sub Category') }}</h4>
 														</div>
 													</div>
 													<div class="col-lg-7">
@@ -124,7 +124,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Child Category') }}*</h4>
+																<h4 class="heading">{{ __('Child Category') }}</h4>
 														</div>
 													</div>
 													<div class="col-lg-7">
@@ -170,7 +170,7 @@
 													<div class="col-lg-4">
 														<div class="left-area">
 																<h4 class="heading">
-																		{{ __('Product Gallery Images') }} *
+																		{{ __('Product Gallery Images') }}
 																</h4>
 														</div>
 													</div>
@@ -385,7 +385,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Product Previous Price') }}*</h4>
+																<h4 class="heading">{{ __('Product Previous Price') }}</h4>
 																<p class="sub-heading">{{ __('(Optional)') }}</p>
 														</div>
 													</div>
@@ -397,7 +397,7 @@
 												<div class="row" id="stckprod">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Product Stock') }}*</h4>
+																<h4 class="heading">{{ __('Product Stock') }}</h4>
 																<p class="sub-heading">{{ __('(Leave Empty will Show Always Available)') }}</p>
 														</div>
 													</div>
@@ -460,7 +460,7 @@
 													<div class="col-lg-4">
 														<div class="left-area">
 															<h4 class="heading">
-																	{{ __('Product Buy/Return Policy') }}*
+																	{{ __('Product Buy/Return Policy') }}
 															</h4>
 														</div>
 													</div>
@@ -475,7 +475,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Youtube Video URL') }}*</h4>
+																<h4 class="heading">{{ __('Youtube Video URL') }}</h4>
 																<p class="sub-heading">{{ __('(Optional)') }}</p>
 														</div>
 													</div>
@@ -558,7 +558,7 @@
 						                        <div class="row">
 						                          <div class="col-lg-4">
 						                            <div class="left-area">
-						                                <h4 class="heading">{{ __('Tags') }} *</h4>
+						                                <h4 class="heading">{{ __('Tags') }} </h4>
 						                            </div>
 						                          </div>
 						                          <div class="col-lg-7">

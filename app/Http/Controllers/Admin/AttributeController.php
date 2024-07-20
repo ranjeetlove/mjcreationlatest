@@ -35,6 +35,7 @@ class AttributeController extends Controller
     }
 
     public function store(Request $request) {
+        //dd($request->all());
       //--- Validation Section
       $rules = [
           'name' => [
@@ -58,6 +59,9 @@ class AttributeController extends Controller
       //--- Logic Section
       $in = $request->all();
       $in['attributable_id'] = $request->category_id;
+
+     // dd($in['attributable_id']);
+
       if ($request->type == 'category') {
         $in['attributable_type'] = 'App\Models\Category';
       } elseif ($request->type == 'subcategory') {
@@ -84,10 +88,13 @@ class AttributeController extends Controller
     ->where('attributable_id', $request->category_id)
     ->where('attributable_type', $in['attributable_type'])
     ->first();
-    //--- Redirect Section
-     $msg = 'Attribute already exists.';
-    return response()->json($msg);
-         //--- Redirect Section Ends
+    if ($existingAttribute !== null) {
+        //--- Redirect Section
+        $msg = 'Attribute already exists.';
+        return response()->json($msg);
+        //--- Redirect Section Ends
+    }
+
       $newAttr = Attribute::create($in);
       //--- Logic Section Ends
       $opts = $request->options;
@@ -173,7 +180,7 @@ class AttributeController extends Controller
       }
 
       //--- Redirect Section
-      $msg = 'New Data Added Successfully.';
+      $msg = 'New Data Updated Successfully.';
       return response()->json($msg);
       //--- Redirect Section Ends
     }

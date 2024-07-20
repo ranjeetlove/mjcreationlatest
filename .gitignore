@@ -20,3 +20,4 @@ yarn-error.log
 composer.json
 composer.lock
 /public/vender/livewire
+/storage

@@ -44,6 +44,10 @@ class ProductController extends Controller
 
                                 return  $name.'<br>'.$id.$id3.$id2;
                             })
+                            ->editColumn('photo', function(Product $data) {
+                                $photo = $data->photo ? url('assets/images/products/'.$data->photo):url('assets/images/noimage.png');
+                                return '<img src="' . $photo . '" alt="Image" width="100" height="100">';
+                            })
                             ->editColumn('price', function(Product $data) {
                                 $sign = Currency::where('is_default','=',1)->first();
                                 $price = round($data->price * $sign->value , 2);
@@ -69,7 +73,7 @@ class ProductController extends Controller
                                 $catalog = $data->type == 'Physical' ? ($data->is_catalog == 1 ? '<a href="javascript:;" data-href="' . route('admin-prod-catalog',['id1' => $data->id, 'id2' => 0]) . '" data-toggle="modal" data-target="#catalog-modal" class="delete"><i class="fas fa-trash-alt"></i> Remove Catalog</a>' : '') : '';
                                 return '<div class="godropdown"><button class="go-dropdown-toggle"> Actions<i class="fas fa-chevron-down"></i></button><div class="action-list"><a href="' . route('admin-prod-edit',$data->id) . '"> <i class="fas fa-edit"></i> Edit</a><a href="javascript" class="set-gallery" data-toggle="modal" data-target="#setgallery"><input type="hidden" value="'.$data->id.'"><i class="fas fa-eye"></i> View Gallery</a>'.$catalog.'<a href="javascript:;" data-href="' . route('admin-prod-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i> Delete</a></div></div>';
                             })
-                            ->rawColumns(['name', 'status', 'action'])
+                            ->rawColumns(['name', 'photo','status', 'action'])
                             ->toJson(); //--- Returning Json Data To Client Side
     }
 
@@ -125,6 +129,8 @@ class ProductController extends Controller
     public function catalogdatatables()
     {
          $datas = Product::where('is_catalog','=',1)->orderBy('id','desc')->get();
+
+
 
          //--- Integrating This Collection Into Datatables
          return Datatables::of($datas)

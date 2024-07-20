@@ -74,6 +74,15 @@
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a></h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="rating-div">
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                        </div>
+                                        <div class="in-stock">Stock</div>
+                                        </div>
                                     @if (!empty($product->price))
                                     <span class="prod-title prodcut-price">₹{{ $product->price }} </span>
                                     @else
@@ -90,7 +99,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         @endforeach
                     @else
                         <div class="col-md-12 text-center">
@@ -130,6 +138,15 @@
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a></h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="rating-div">
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                        </div>
+                                        <div class="in-stock">Stock</div>
+                                        </div>
                                     @if (!empty($product->price))
                                     <span class="prod-title prodcut-price">₹{{ $product->price }} </span>
                                     @else
@@ -177,6 +194,15 @@
                                     </a>
                                     <div class="product-content">
                                     <h3 class="prod-title"><a href="{{ route('product-detail', ['id' => $product->id]) }}">{{ $product->name }}</a></h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="rating-div">
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                            <span>&#9733;</span>
+                                        </div>
+                                        <div class="in-stock">Stock</div>
+                                        </div>
                                     @if (!empty($product->product))
                                     <span class="prod-title prodcut-price">₹{{ $product->price }} </span>
                                     @else
