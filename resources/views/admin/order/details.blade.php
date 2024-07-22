@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-     
+
 @section('styles')
 
 <style type="text/css">
@@ -72,20 +72,20 @@
                                                     <td width="10%">:</td>
                                                     <td width="45%">{{$order->method}}</td>
                                                 </tr>
-                
+
                                                 @if($order->method != "Cash On Delivery")
                                                 @if($order->method=="Stripe")
                                                 <tr>
                                                     <th width="45%">{{$order->method}} {{ __('Charge ID') }}</th>
                                                     <td width="10%">:</td>
                                                     <td width="45%">{{$order->charge_id}}</td>
-                                                </tr>                        
+                                                </tr>
                                                 @endif
                                                 <tr>
                                                     <th width="45%">{{$order->method}} {{ __('Transaction ID') }}</th>
                                                     <td width="10%">:</td>
                                                     <td width="45%">{{$order->txnid}}</td>
-                                                </tr>                         
+                                                </tr>
                                                 @endif
 
 
@@ -165,7 +165,7 @@
                                 <th width="10%">:</th>
                                 @if($gs->currency_format == 0)
                                 <td width="45%">{{ $order->currency_sign }}{{ $order->coupon_discount }}</td>
-                                @else 
+                                @else
                                 <td width="45%">{{ $order->coupon_discount }}{{ $order->currency_sign }}</td>
                                 @endif
                             </tr>
@@ -183,7 +183,7 @@
                                 <th width="10%">:</th>
                                 @if($gs->currency_format == 0)
                                 <td width="45%">{{ $order->currency_sign }}{{$order->affilate_charge}}</td>
-                                @else 
+                                @else
                                 <td width="45%">{{$order->affilate_charge}}{{ $order->currency_sign }}</td>
                                 @endif
                             </tr>
@@ -254,6 +254,73 @@
                                     </div>
                                 </div>
                                 @endif
+
+
+
+                                <div class="col-lg-6">
+                                    <div class="special-box">
+                                        <div class="heading-area">
+                                            <h4 class="title">
+                                            {{ __('Shipping activity') }}
+                                            </h4>
+                                        </div>
+                                        <div class="table-responsive-sm">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="45%" width="45%">Order was placed ({{ __('Order ID :#') }}{{$order->order_number}} )</th>
+                                                        <td width="10%">:</td>
+                                                        <td class="45%" width="45%">{{date('d-M-Y H:i:s a',strtotime($order->created_at))}}</td>
+                                                    </tr>
+                                                    @if(!empty($trackOrder))
+                                                    @foreach ($trackOrder as  $track)
+                                                    <tr>
+                                                        <th width="45%"><strong>{{ $track->title}}:</strong></th>
+                                                        <th width="10%">:</th>
+                                                        <td width="45%">{{date('d-M-Y H:i:s a',strtotime($track->created_at))}}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                    @endif
+
+                                {{-- <tr>
+                                    <th width="45%"><strong>{{ __('Pick-up') }}:</strong></th>
+                                    <th width="10%">:</th>
+                <td>Wednesday 11:29 AM</td>
+                                </tr>
+                                <tr>
+                                    <th width="45%"><strong>{{ __('Dispatched') }}:</strong></th>
+                                    <th width="10%">:</th>
+                <td width="45%">Thursday 11:29 AM</td>
+                                </tr>
+                                <tr>
+                                    <th width="45%"><strong>{{ __('Package arrived') }}:</strong></th>
+                                    <th width="10%">:</th>
+                <td width="45%">Saturday 15:20 AM</td>
+                                </tr>
+                                <tr>
+                                    <th width="45%"><strong>{{ __('Dispatched for delivery') }}:</strong></th>
+                                    <th width="10%">:</th>
+                <td width="45%">Today 14:12 PM</td>
+                                </tr>
+                                <tr>
+                                    <th width="45%"><strong>{{ __('Delivery') }}:</strong></th>
+                                    <th width="10%">:</th>
+                <td width="45%">Completed</td>
+                                </tr> --}}
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
                             </div>
 
 
@@ -279,7 +346,7 @@
                                                         <tbody>
                                 @foreach($cart->items as $key => $product)
                                     <tr>
-                                        
+
                                             <td><input type="hidden" value="{{$key}}">{{ $product['item']['id'] }}</td>
 
                                             <td>
@@ -292,7 +359,7 @@
                                                 @else
                                                 {{ __('Vendor Removed') }}
                                                 @endif
-                                                @else 
+                                                @else
                                                 <a  href="javascript:;">{{ App\Models\Admin::find(1)->shop_name }}</a>
                                                 @endif
 
@@ -339,12 +406,12 @@
                                                     {{strlen($product['item']['name']) > 30 ? substr($product['item']['name'],0,30).'...' : $product['item']['name']}}
                                                 </a>
                                                 @endif
-                                                @else 
+                                                @else
 
                                                 <a target="_blank" href="{{ route('front.product', $product['item']['slug']) }}">
                                                     {{strlen($product['item']['name']) > 30 ? substr($product['item']['name'],0,30).'...' : $product['item']['name']}}
                                                 </a>
-                                            
+
                                                 @endif
 
 
@@ -376,7 +443,7 @@
                                                     @foreach( array_combine(explode(',', $product['keys']), explode(',', $product['values']))  as $key => $value)
                                                     <p>
 
-                                                        <b>{{ ucwords(str_replace('_', ' ', $key))  }} : </b> {{ $value }} 
+                                                        <b>{{ ucwords(str_replace('_', ' ', $key))  }} : </b> {{ $value }}
 
                                                     </p>
                                                     @endforeach
@@ -397,11 +464,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 text-center mt-2">
-                                        <a class="btn sendEmail send" href="javascript:;" class="send" data-email="{{ $order->customer_email }}" data-toggle="modal" data-target="#vendorform">
-                                                <i class="fa fa-send"></i> {{ __('Send Email') }}
-                                        </a>
-                                    </div>
+
                                 </div>
                         </div>
                     </div>
@@ -543,8 +606,8 @@ $('#example2').dataTable( {
         $(document).on('click','#license' , function(e){
             var id = $(this).parent().find('input[type=hidden]').val();
             var key = $(this).parent().parent().find('input[type=hidden]').val();
-            $('#key').html(id);  
-            $('#license-key').val(key);    
+            $('#key').html(id);
+            $('#license-key').val(key);
     });
         $(document).on('click','#license-edit' , function(e){
             $(this).hide();

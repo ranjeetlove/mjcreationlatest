@@ -891,7 +891,7 @@ public function importImageSubmit(Request $request)
     //*** POST Request
     public function update(Request $request, $id)
     {
-      // return $request;
+
         //--- Validation Section
         $rules = [
                'file'       => 'mimes:zip'

@@ -26,54 +26,12 @@
 
 
     <div class="row row-cards-one">
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="mycard bg1">
-                <div class="left">
-                    <h5 class="title">{{ __('Orders Pending!') }} </h5>
-                    <span class="number">{{count($pending)}}</span>
-                    <a href="{{route('admin-order-pending')}}" class="link">{{ __('View All') }}</a>
-                </div>
-                <div class="right d-flex align-self-center">
-                    <div class="icon">
-                        <i class="icofont-dollar"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="mycard bg2">
-                <div class="left">
-                    <h5 class="title">{{ __('Orders Procsessing!') }}</h5>
-                    <span class="number">{{count($processing)}}</span>
-                    <a href="{{route('admin-order-processing')}}" class="link">{{ __('View All') }}</a>
-                </div>
-                <div class="right d-flex align-self-center">
-                    <div class="icon">
-                        <i class="icofont-truck-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="mycard bg3">
-                <div class="left">
-                    <h5 class="title">{{ __('Orders Completed!') }}</h5>
-                    <span class="number">{{count($completed)}}</span>
-                    <a href="{{route('admin-order-completed')}}" class="link">{{ __('View All') }}</a>
-                </div>
-                <div class="right d-flex align-self-center">
-                    <div class="icon">
-                        <i class="icofont-check-circled"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="col-md-12 col-lg-6 col-xl-4">
             <div class="mycard bg4">
                 <div class="left">
                     <h5 class="title">{{ __('Total Products!') }}</h5>
                     <span class="number">{{count($products)}}</span>
-                    <a href="{{route('admin-prod-index')}}" class="link">{{ __('View All') }}</a>
                 </div>
                 <div class="right d-flex align-self-center">
                     <div class="icon">
@@ -82,151 +40,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="mycard bg5">
-                <div class="left">
-                    <h5 class="title">{{ __('Total Customers!') }}</h5>
-                    <span class="number">{{count($users)}}</span>
-                    <a href="{{route('admin-user-index')}}" class="link">{{ __('View All') }}</a>
-                </div>
-                <div class="right d-flex align-self-center">
-                    <div class="icon">
-                        <i class="icofont-users-alt-5"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="mycard bg6">
-                <div class="left">
-                    <h5 class="title">{{ __('Total Posts!') }}</h5>
-                    <span class="number">{{count($blogs)}}</span>
-                    <a href="{{ route('admin-blog-index') }}" class="link">{{ __('View All') }}</a>
-                </div>
-                <div class="right d-flex align-self-center">
-                    <div class="icon">
-                        <i class="icofont-newspaper"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </div>
-
-    <div class="row row-cards-one">
-        <div class="col-md-6 col-xl-3">
-            <div class="card c-info-box-area">
-                <div class="c-info-box box1">
-                    <p>{{ App\Models\User::where( 'created_at', '>', Carbon\Carbon::now()->subDays(30))->get()->count()  }}</p>
-                </div>
-                <div class="c-info-box-content">
-                    <h6 class="title">{{ __('New Customers') }}</h6>
-                    <p class="text">{{ __('Last 30 Days') }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card c-info-box-area">
-                <div class="c-info-box box2">
-                    <p>{{ App\Models\User::count() }}</p>
-                </div>
-                <div class="c-info-box-content">
-                    <h6 class="title">{{ __('Total Customers') }}</h6>
-                    <p class="text">{{ __('All Time') }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card c-info-box-area">
-                <div class="c-info-box box3">
-                    <p>{{ App\Models\Order::where('status','=','completed')->where( 'created_at', '>', Carbon\Carbon::now()->subDays(30))->get()->count()  }}</p>
-                </div>
-                <div class="c-info-box-content">
-                    <h6 class="title">{{ __('Total Sales') }}</h6>
-                    <p class="text">{{ __('Last 30 days') }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xl-3">
-            <div class="card c-info-box-area">
-                <div class="c-info-box box4">
-                     <p>{{ App\Models\Order::where('status','=','completed')->get()->count() }}</p>
-                </div>
-                <div class="c-info-box-content">
-                    <h6 class="title">{{ __('Total Sales') }}</h6>
-                    <p class="text">{{ __('All Time') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row row-cards-one">
-
-        <div class="col-md-6 col-lg-6 col-xl-6">
-            <div class="card">
-                <h5 class="card-header">{{ __('Recent Order(s)') }}</h5>
-                <div class="card-body">
-
-                    <div class="my-table-responsiv">
-                        <table class="table table-hover dt-responsive" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-
-                                    <th>{{ __('Order Number') }}</th>
-                                    <th>{{ __('Order Date') }}</th>
-                                </tr>
-                                @foreach($rorders as $data)
-                                <tr>
-                                    <td>{{ $data->order_number }}</td>
-                                    <td>{{ date('Y-m-d',strtotime($data->created_at)) }}</td>
-                                    <td>
-                                        <div class="action-list"><a href="{{ route('admin-order-show',$data->id) }}"><i
-                                                    class="fas fa-eye"></i> {{ __('Details') }}</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </thead>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-md-6 col-lg-6 col-xl-6">
-                <div class="card">
-                        <h5 class="card-header">{{ __('Recent Customer(s)') }}</h5>
-                        <div class="card-body">
-
-                            <div class="my-table-responsiv">
-                                <table class="table table-hover dt-responsive" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('Customer Email') }}</th>
-                                            <th>{{ __('Joined') }}</th>
-                                        </tr>
-                                        @foreach($rusers as $data)
-                                        <tr>
-                                            <td>{{ $data->email }}</td>
-                                            <td>{{ $data->created_at }}</td>
-                                            <td>
-                                                <div class="action-list"><a href="{{ route('admin-user-show',$data->id) }}"><i
-                                                            class="fas fa-eye"></i> {{ __('Details') }}</a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </thead>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-        </div>
-    </div>
-
 
 </div>
 

@@ -19,11 +19,12 @@ class FrontendController extends Controller
         $banner = DB::table('banners')->where('type','=','TopSmall')->get();
         $ps = DB::table('pagesettings')->find(1);
         $feature_products =  Product::where('featured','=',1)->where('status','=',1)->orderBy('id','desc')->take(8)->get();
-        $datalist = Category::with('products')->take(4)->get();
-        $datalistafter = Category::with('products')
-            ->skip(4)
-            ->take(PHP_INT_MAX)
-            ->get();
+        $datalist = Category::with('products')->take(4)->get()->filter(function ($category) {
+            return $category->products->count() > 0;
+        });
+        $datalistafter = Category::with('products')->get()->filter(function ($category) {
+            return $category->products->count() > 0;
+        })->skip(4)->take(PHP_INT_MAX);
             $mostViewedProducts = Product::orderBy('id', 'desc')
             ->take(4)
             ->get();

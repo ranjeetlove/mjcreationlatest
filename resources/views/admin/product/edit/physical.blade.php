@@ -886,7 +886,7 @@
 
 																		<div class="col-lg-6">
 											                                <div class="input-group colorpicker-component cp">
-											                                  <input type="text" name="colors[]" value="{{ $data->colors[$key] }}" class="input-field cp"/>
+                                                                              <input type="text" name="colors[]" value="{{ isset($data->colors[$key]) ? $data->colors[$key] : '' }}" class="input-field cp"/>
 											                                  <span class="input-group-addon"><i></i></span>
 											                                </div>
 																		</div>
