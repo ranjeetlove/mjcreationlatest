@@ -25,12 +25,21 @@
     color:#000;
     border:1px solid #243164;
 }
+.product-card1{
+    display:flex;
+    align-items:center;
+}
+@media (max-width: 767.98px){
+    .product-card1{
+    display:block;
+}
+}
 </style>
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
             @foreach ($cart as $item)
-            <div class="product-card1 d-flex align-items-center mb-3">
+            <div class="product-card1 mb-3">
                 <img src="{{ asset('assets/images/products/' . $item['image']) }}" class="img-fluid" alt="Product Image">
                 <div class="ml-3">
                     <h5>{{ $item['name'] }}</h5>
@@ -43,13 +52,13 @@
                             <input type="number" value="{{ $item['quantity'] }}" class="form-control quantity-input" data-product-id="{{ $item['id'] }}">
                             <button type="button" class="btn-increment" data-product-id="{{ $item['id'] }}">+</button>
                         </div>
-                        <div class="action-buttons">
+                        <div class="action-buttons d-flex">
                             <form action="{{ route('cart.remove') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                                <button type="submit" class="btn btn-outline-secondary ml-2 remove">Remove</button>
+                                <button type="submit" class="btn btn-outline-secondary mx-2 remove">Remove</button>
                             </form>
-                            <button class="btn btn-outline-secondary ml-2 save-for-later" data-product-id="{{ $item['id'] }}">Save for later</button>
+                            <button class="btn btn-outline-secondary mx-2 save-for-later" data-product-id="{{ $item['id'] }}">Save for later</button>
                         </div>
                     </div>
                 </div>

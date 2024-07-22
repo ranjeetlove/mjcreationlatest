@@ -119,7 +119,7 @@
                             ₹23.00</span><span>2%off</span>
                     </div>
                     <span><b></b>Availability: {{ $product->stock }} in stock</b></span>
-                    <div class="add-btn add-btn1 my-3">
+                    <div class="add-btn my-3">
                         <form method="POST" action="{{ route('add.to.cart') }}" class="add-to-cart-form add-to-cart-form1 d-flex">
                             @csrf
                             <div class="product-counter">
