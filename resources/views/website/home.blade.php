@@ -68,8 +68,7 @@
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                                         <div class="prodcut-img-outer-box">
-                                        <img src="{{ asset('assets/images/products/' . $product->photo) }}"
-                                        class="prod-img mb-2" />
+                                            <img src="{{ asset($product->photo ? 'assets/images/products/' . $product->photo : 'assets/images/default-product.jpg') }}" class="prod-img mb-2" />
                                          </div>
                                     </a>
                                     <div class="product-content">
@@ -113,7 +112,7 @@
     <section>
         <div class="container my-5">
             <div class="row">
-                <img src="{{ asset('uploads/banner/category-banner-1.jpg') }}" class="img-fluid" />
+                <img src="{{ asset('uploads/banner/fb_watch_title_image_pc.jpg') }}" class="img-fluid" />
             </div>
         </div>
     </section>
@@ -132,8 +131,7 @@
                             <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                                         <div class="prodcut-img-outer-box">
-                                        <img src="{{ asset('assets/images/products/' . $product->photo) }}"
-                                        class="prod-img mb-2" />
+                                            <img src="{{ asset($product->photo ? 'assets/images/products/' . $product->photo : 'assets/images/default-product.jpg') }}" class="prod-img mb-2" />
                                          </div>
                                     </a>
                                     <div class="product-content">
@@ -188,8 +186,7 @@
                                 <div class="prod-box">
                                     <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                                         <div class="prodcut-img-outer-box">
-                                        <img src="{{ asset('assets/images/products/' . $product->photo) }}"
-                                        class="prod-img mb-2" />
+                                            <img src="{{ asset($product->photo ? 'assets/images/products/' . $product->photo : 'assets/images/default-product.jpg') }}" class="prod-img mb-2" />
                                          </div>
                                     </a>
                                     <div class="product-content">

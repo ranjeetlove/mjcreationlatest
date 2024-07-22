@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\Product;
-use Image;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller
 {
@@ -42,7 +43,7 @@ class GalleryController extends Controller
 
 
         $img = Image::make($file->getRealPath())->resize(800, 800);
-        $thumbnail = time().str_random(8).'.jpg';
+        $thumbnail = time().Str::random(8).'.jpg';
         $img->save(public_path().'/assets/images/galleries/'.$thumbnail);
 
                     $gallery['photo'] = $thumbnail;

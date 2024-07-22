@@ -11,8 +11,10 @@ class Cart extends Model
     public $totalQty = 0;
     public $totalPrice = 0;
 
-    public function __construct($oldCart)
+    public function __construct($oldCart = null)
     {
+        parent::__construct(); // Ensure the parent constructor is called
+
         if ($oldCart) {
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
@@ -31,7 +33,7 @@ class Cart extends Model
                 if (array_key_exists($id.$size.$color.str_replace(str_split(' ,'),'',$values), $this->items)) {
                     $storedItem = $this->items[$id.$size.$color.str_replace(str_split(' ,'),'',$values)];
                 }
-            }            
+            }
         }
         else {
             if ($this->items) {
@@ -45,30 +47,30 @@ class Cart extends Model
         $stck = (string)$item->stock;
         if($stck != null){
                 $storedItem['stock']--;
-        }            
-        if(!empty($item->size)){ 
+        }
+        if(!empty($item->size)){
         $storedItem['size'] = $item->size[0];
-        }  
+        }
         if(!empty($size)){
-        $storedItem['size'] = $size;    
-        } 
-        if(!empty($item->size_qty)){ 
+        $storedItem['size'] = $size;
+        }
+        if(!empty($item->size_qty)){
         $storedItem['size_qty'] = $item->size_qty[0];
-        }  
-        if($item->size_price != null){ 
+        }
+        if($item->size_price != null){
         $storedItem['size_price'] = $item->size_price[0];
         $size_cost = $item->size_price[0];
-        } 
+        }
         if(!empty($color)){
-        $storedItem['color'] = $color;    
-        } 
+        $storedItem['color'] = $color;
+        }
 
 
         if(!empty($keys)){
-        $storedItem['keys'] = $keys;    
+        $storedItem['keys'] = $keys;
         }
         if(!empty($values)){
-        $storedItem['values'] = $values;    
+        $storedItem['values'] = $values;
         }
         $item->price += $size_cost;
         if(!empty($item->whole_sell_qty))
@@ -76,11 +78,11 @@ class Cart extends Model
             foreach(array_combine($item->whole_sell_qty,$item->whole_sell_discount) as $whole_sell_qty => $whole_sell_discount)
             {
                 if($storedItem['qty'] == $whole_sell_qty)
-                {   
+                {
                     $whole_discount[$id.$size.$color.str_replace(str_split(' ,'),'',$values)] = $whole_sell_discount;
                     Session::put('current_discount',$whole_discount);
                     break;
-                }                  
+                }
             }
             if(Session::has('current_discount')) {
                     $data = Session::get('current_discount');
@@ -111,7 +113,7 @@ class Cart extends Model
                 if (array_key_exists($id.$size.$color.str_replace(str_split(' ,'),'',$values), $this->items)) {
                     $storedItem = $this->items[$id.$size.$color.str_replace(str_split(' ,'),'',$values)];
                 }
-            }            
+            }
         }
         else {
             if ($this->items) {
@@ -125,41 +127,41 @@ class Cart extends Model
         $stck = (string)$item->stock;
         if($stck != null){
                 $storedItem['stock']--;
-        }              
-        if(!empty($item->size)){ 
+        }
+        if(!empty($item->size)){
         $storedItem['size'] = $item->size[0];
-        }  
+        }
         if(!empty($size)){
-        $storedItem['size'] = $size;    
+        $storedItem['size'] = $size;
         }
         if(!empty($size_key)){
-        $storedItem['size_key'] = $size_key;    
+        $storedItem['size_key'] = $size_key;
         }
-        if(!empty($item->size_qty)){ 
+        if(!empty($item->size_qty)){
         $storedItem['size_qty'] = $item->size_qty [0];
-        }  
-        if(!empty($size_qty)){
-        $storedItem['size_qty'] = $size_qty;    
         }
-        if(!empty($item->size_price)){ 
+        if(!empty($size_qty)){
+        $storedItem['size_qty'] = $size_qty;
+        }
+        if(!empty($item->size_price)){
         $storedItem['size_price'] = $item->size_price[0];
         $size_cost = $item->size_price[0];
-        }  
+        }
         if(!empty($size_price)){
-        $storedItem['size_price'] = $size_price;    
+        $storedItem['size_price'] = $size_price;
         $size_cost = $size_price;
         }
-        if(!empty($item->color)){ 
+        if(!empty($item->color)){
         $storedItem['color'] = $item->color[0];
-        }  
+        }
         if(!empty($color)){
-        $storedItem['color'] = $color;    
+        $storedItem['color'] = $color;
         }
         if(!empty($keys)){
-        $storedItem['keys'] = $keys;    
+        $storedItem['keys'] = $keys;
         }
         if(!empty($values)){
-        $storedItem['values'] = $values;    
+        $storedItem['values'] = $values;
         }
 
         $item->price += $size_cost;
@@ -168,11 +170,11 @@ class Cart extends Model
             foreach(array_combine($item->whole_sell_qty,$item->whole_sell_discount) as $whole_sell_qty => $whole_sell_discount)
             {
                 if($storedItem['qty'] == $whole_sell_qty)
-                {   
+                {
                     $whole_discount[$id.$size.$color.str_replace(str_split(' ,'),'',$values)] = $whole_sell_discount;
                     Session::put('current_discount',$whole_discount);
                     break;
-                }                  
+                }
             }
             if(Session::has('current_discount')) {
                     $data = Session::get('current_discount');
@@ -205,18 +207,18 @@ class Cart extends Model
 
             if($item->stock != null){
                 $storedItem['stock']--;
-            }          
-        $item->price = (double)$size_price;   
+            }
+        $item->price = (double)$size_price;
         if(!empty($item->whole_sell_qty))
         {
             foreach(array_combine($item->whole_sell_qty,$item->whole_sell_discount) as $whole_sell_qty => $whole_sell_discount)
             {
                 if($storedItem['qty'] == $whole_sell_qty)
-                {   
+                {
                     $whole_discount[$id] = $whole_sell_discount;
                     Session::put('current_discount',$whole_discount);
                     break;
-                }                  
+                }
             }
             if(Session::has('current_discount')) {
                     $data = Session::get('current_discount');
@@ -247,26 +249,26 @@ class Cart extends Model
         $storedItem['qty']--;
             if($item->stock != null){
                 $storedItem['stock']++;
-            }            
+            }
 
-        $item->price = (double)$size_price;   
+        $item->price = (double)$size_price;
         if(!empty($item->whole_sell_qty))
         {
             $len = count($item->whole_sell_qty);
             foreach($item->whole_sell_qty as $key => $data1)
             {
                 if($storedItem['qty'] < $item->whole_sell_qty[$key])
-                {   
+                {
                     if($storedItem['qty'] < $item->whole_sell_qty[0])
-                    {   
+                    {
                         Session::forget('current_discount');
                         break;
-                    }  
+                    }
 
                     $whole_discount[$id] = $item->whole_sell_discount[$key-1];
                     Session::put('current_discount',$whole_discount);
                     break;
-                }      
+                }
 
 
             }

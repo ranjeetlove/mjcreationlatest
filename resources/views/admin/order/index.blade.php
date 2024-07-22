@@ -1,18 +1,18 @@
-@extends('layouts.admin') 
+@extends('layouts.admin')
 
 @section('styles')
 
 <style type="text/css">
-    
-.input-field { 
-    padding: 15px 20px; 
+
+.input-field {
+    padding: 15px 20px;
 }
 
 </style>
 
 @endsection
 
-@section('content')  
+@section('content')
 
 <input type="hidden" id="headerdata" value="{{ __('ORDER') }}">
 
@@ -39,16 +39,18 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="mr-table allproduct">
-                                        @include('includes.admin.form-success') 
+                                        @include('includes.admin.form-success')
                                         <div class="table-responsiv">
                                         <div class="gocover" style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center  ;"></div>
                                                 <table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
+                                                           <th>{{ __('Customer Name') }}</th>
                                                             <th>{{ __('Customer Email') }}</th>
                                                             <th>{{ __('Order Number') }}</th>
-                                                            <th>{{ __('Total Qty') }}</th>
-                                                            <th>{{ __('Total Cost') }}</th>
+                                                            <th>{{ __('Order Date') }}</th>
+                                                            <th>{{ __('Payment') }}</th>
+                                                            <th>{{ __('Order Status') }}</th>
                                                             <th>{{ __('Options') }}</th>
                                                         </tr>
                                                     </thead>
@@ -145,7 +147,7 @@
 {{-- ADD / EDIT MODAL --}}
 
                 <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
-                                        
+
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                                                 <div class="submit-loader">
@@ -170,7 +172,7 @@
 
 {{-- ADD / EDIT MODAL ENDS --}}
 
-@endsection    
+@endsection
 
 @section('scripts')
 
@@ -184,22 +186,24 @@
                serverSide: true,
                ajax: '{{ route('admin-order-datatables','none') }}',
                columns: [
+                { data: 'customer_name', name: 'customer_name' },
                         { data: 'customer_email', name: 'customer_email' },
                         { data: 'id', name: 'id' },
-                        { data: 'totalQty', name: 'totalQty' },
-                        { data: 'pay_amount', name: 'pay_amount' },
+                        { data: 'created_at', name: 'created_at' },
+                        { data: 'payment_status', name: 'payment_status' },
+                        { data: 'status', name: 'status' },
                         { data: 'action', searchable: false, orderable: false }
                      ],
                language : {
                     processing: '<img src="{{asset('assets/images/'.$gs->admin_loader)}}">'
                 },
                 drawCallback : function( settings ) {
-                        $('.select').niceSelect();  
+                        $('.select').niceSelect();
                 }
             });
-                                                                
+
     </script>
 
 {{-- DATA TABLE --}}
-    
-@endsection   
+
+@endsection
