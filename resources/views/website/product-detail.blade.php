@@ -9,7 +9,7 @@
                 <ul class="breadcrumb">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">Dhoop Collection</a></li>
-                  <li>Hari Darshan Deluxe Doop 20 Sticks</li>
+                  <li>Hari Darshan Deluxe Doop 20 Stick</li>
                 </ul>
               </div>
             </div>
