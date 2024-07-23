@@ -156,7 +156,7 @@
 					<nav id="sidebar" class="nav-sidebar">
 						<ul class="list-unstyled components" id="accordion">
 							<li>
-								<a href="javascript:void(0)" class="wave-effect active"><i class="fa fa-home mr-2"></i>{{ __('Dashboard') }}</a>
+								<a href="/admin/admin" class="wave-effect active"><i class="fa fa-home mr-2"></i>{{ __('Dashboard') }}</a>
 							</li>
 							@if(Auth::guard('admin')->user()->IsSuper())
 							@include('includes.admin.roles.super')

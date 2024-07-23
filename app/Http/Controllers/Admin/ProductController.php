@@ -45,7 +45,7 @@ class ProductController extends Controller
                                 return  $name.'<br>'.$id.$id3.$id2;
                             })
                             ->editColumn('photo', function(Product $data) {
-                                $photo = $data->photo ? url('assets/images/products/'.$data->photo):url('assets/images/noimage.png');
+                                $photo = $data->photo ? url('public/assets/images/products/'.$data->photo):url('assets/images/noimage.png');
                                 return '<img src="' . $photo . '" alt="Image" width="100" height="100">';
                             })
                             ->editColumn('price', function(Product $data) {
