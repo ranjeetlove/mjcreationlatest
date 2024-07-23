@@ -1,83 +1,7 @@
 @extends('website.layout.main')
 @section('title', 'Mjcreation')
 @section('content')
-<style>
-.payment-p{
-    font-size: 14px !important;
-}
-.credit-card{
-    font-size:16px !important
-}
-.paym{
-    border: 0.5px solid #E5E7EB;
-    border-radius: 5px;
-    padding: 10px;
-}
-.buy-now{
-    background-color:#243164;
-    font-size:12px;
-}
-.buy-now:hover{
-    background-color:#fff;
-    font-size:12px;
-    color:#000;
-    border:1px solid #243164
-}
-.prod-hr{
-    height:0.3px !important;
-}
-.main-image{
-    border:none;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-.thum-box{
-    border:none;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-.prod-gallery{
-    display:flex;
-    justify-content:space-between;
-}
-.product-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-right: 10px;
-}
 
-.counter-btn {
-    background-color: #fff;
-    border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-    cursor: pointer;
-    outline: none;
-}
-
-.counter-input {
-    width: 50px;
-    height: 40px;
-    text-align: center;
-    border: none;
-    font-size: 18px;
-    outline: none;
-}
-.product-title{
-    font-size:34px;
-}
-@media only screen and (max-width: 600px) {
-  .whish{
-    cursor: pointer;
-    display: block;
-    justify-content: space-between;
-    align-items: center !important;
-  }
-}
-</style>
     <section>
         <div class="container">
             <div class="row">
@@ -149,7 +73,8 @@
                         </div>
                         <hr class="prod-hr"/>
                         <div class="paym1">
-                            <span class="c-card"><i class="fa fa-credit-card credit-card"></i></span>
+                            <span class="c-card"><i class="fa fa-shield credit-card"></i>
+                         </span>
                             <div>
                             <p class="payment-p">
                                 <b>Warranty.</b> The Consumer Protection Act does not provide
@@ -160,14 +85,16 @@
                     </div>
                     <div class="whish mt-3">
                         <div class="me-3">
-                            <span><img src="{{ asset('img/heart-icon.png') }}" alt="heart-icon" /></span>Add to wishlist
+                            <span><i class="fa fa-heart-o"></i></span> Add to wishlist
                         </div>
                         <div class="me-3 d-flex">
-                            <span><img src="{{ asset('img/share-icon.png') }}" alt="share-icon" /></span><div class="media-links">
-                        <span><i class="fa fa-instagram sc-icon"></i></span>
-                        <span><i class="fa fa-facebook-square sc-icon"></i></span>
-                        <span><i class="fa fa-twitter-square sc-icon"></i></span>
-                        <span><i class="fa fa-whatsapp sc-icon"></i></span>
+                            <span><i class="fa fa-share"></i></span><div class="media-links ms-2">
+                        <div class="social-icons">
+        <span><i class="fa fa-instagram sc-icon"></i></span>
+        <span><i class="fa fa-facebook-square sc-icon"></i></span>
+        <span><i class="fa fa-twitter-square sc-icon"></i></span>
+        <span><i class="fa fa-whatsapp sc-icon"></i></span>
+    </div>
                     </div>
                         </div>
                         <div class="me-3">
@@ -202,7 +129,7 @@
                         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                             aria-selected="false">
-                            Reviews (2)
+                            Reviews
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -213,11 +140,9 @@
                         </button>
                     </li>
                 </ul>
+                
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        {!! $product->discription !!}
-                    </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         Hari Darshan Deluxe Dhoop Sticks have a sweet and serene fragrance
                         that adds to the purity of your pooja ceremony. These dhoop sticks
                         also can be used as an aromatic room freshener. So go ahead and
@@ -225,6 +150,71 @@
                         have a sweet and serene fragrance that adds to the purity of your
                         pooja ceremony. These dhoop sticks also can be used as an aromatic
                         room freshener. So go ahead and buy this product online today!
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="container mt-5">
+                    <div class="review">
+                   <div class="d-flex">
+                     <div class="user-img">
+                    <img src="https://via.placeholder.com/60" alt="User Image">
+                    </div>
+                 <div>
+        <h5>Jeny Doe</h5>
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star-half-alt"></i>
+          <i class="fa fa-star-o"></i>
+        </div>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="review">
+    <div class="d-flex">
+      <div class="user-img">
+        <img src="https://via.placeholder.com/60" alt="User Image">
+      </div>
+      <div>
+        <h5>Linda Morgus</h5>
+        <div class="stars">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+        </div>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-review mt-5">
+    <h5>Add a Review</h5>
+    <div class="stars">
+      <i class="fa fa-star-o"></i>
+      <i class="fa fa-star-o"></i>
+      <i class="fa fa-star-o"></i>
+      <i class="fa fa-star-o"></i>
+      <i class="fa fa-star-o"></i>
+    </div>
+    <form class="mt-3">
+      <div class="form-group mb-3">
+        <input type="text" class="form-control" placeholder="Name">
+      </div>
+      <div class="form-group mb-3">
+        <input type="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="form-group mb-3">
+        <textarea class="form-control" rows="3" placeholder="Enter Your Comment"></textarea>
+      </div>
+      <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+  </div>
+</div>
+                       
                     </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         Hari Darshan Deluxe Dhoop Sticks have a sweet and serene fragrance
