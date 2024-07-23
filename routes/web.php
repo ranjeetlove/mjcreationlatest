@@ -905,3 +905,6 @@ Route::get('/vendor/subscription/check', [FrontendController::class, 'subcheck']
 // PAGE SECTION
 Route::get('/{slug}', [FrontendController::class, 'page'])->name('front.page');
 // PAGE SECTION ENDS
+
+
+Route::get('/my-profile', [NarendraController::class, 'narendraController'])->name('front.narendraController');

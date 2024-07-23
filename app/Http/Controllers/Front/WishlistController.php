@@ -18,6 +18,12 @@ class WishlistController extends Controller
         return view('website.wishlist', compact('wishlists'));
     }
 
+    public function checkoutview()
+    {
+
+        return view('website.checkout');
+    }
+
     public function addToWishlist(Request $request)
     {
         $userId = '1'; // Auth::id();
