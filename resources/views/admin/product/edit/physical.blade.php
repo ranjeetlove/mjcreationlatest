@@ -811,7 +811,7 @@
 												<div class="row">
 													<div class="col-lg-4">
 														<div class="left-area">
-																<h4 class="heading">{{ __('Youtube Video URL') }}*</h4>
+																<h4 class="heading">{{ __('Youtube Video URL') }}</h4>
 																<p class="sub-heading">{{ __('(Optional)') }}</p>
 														</div>
 													</div>
