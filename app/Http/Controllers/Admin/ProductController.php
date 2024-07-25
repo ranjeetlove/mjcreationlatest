@@ -588,141 +588,6 @@ class ProductController extends Controller
         return view('admin.product.productcsv',compact('cats','sign'));
     }
 
-//     public function importSubmit(Request $request)
-//     {
-//         $log = "";
-//         //--- Validation Section
-//         $rules = [
-//             'csvfile'      => 'required|mimes:csv,txt',
-//         ];
-
-//         $validator = Validator::make($request->all(), $rules);
-
-//         if ($validator->fails()) {
-//             return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
-//         }
-
-//         $filename = '';
-//         if ($file = $request->file('csvfile'))
-//         {
-//             $filename = time().'-'.$file->getClientOriginalName();
-//             $file->move('assets/temp_files',$filename);
-//         }
-
-//         //$filename = $request->file('csvfile')->getClientOriginalName();
-//         //return response()->json($filename);
-//         $datas = "";
-
-//         $file = fopen(public_path('assets/temp_files/'.$filename),"r");
-//         $i = 1;
-//         while (($line = fgetcsv($file)) !== FALSE) {
-
-//             if($i != 1)
-//             {
-
-// if (!Product::where('sku',$line[0])->exists()){
-
-//                 //--- Validation Section Ends
-
-//                 //--- Logic Section
-//                 $data = new Product;
-//                 $sign = Currency::where('is_default','=',1)->first();
-
-//                 $input['type'] = 'Physical';
-//                 $input['sku'] = $line[0];
-
-//                 $input['category_id'] = "";
-//                 $input['subcategory_id'] = "";
-//                 $input['childcategory_id'] = "";
-
-//                 $mcat = Category::where(DB::raw('lower(name)'), strtolower($line[1]));
-//                 //$mcat = Category::where("name", $line[1]);
-
-//                 if($mcat->exists()){
-//                     $input['category_id'] = $mcat->first()->id;
-
-//                     if($line[2] != ""){
-//                         $scat = Subcategory::where(DB::raw('lower(name)'), strtolower($line[2]));
-
-//                         if($scat->exists()) {
-//                             $input['subcategory_id'] = $scat->first()->id;
-//                         }
-//                     }
-//                     if($line[3] != ""){
-//                         $chcat = Childcategory::where(DB::raw('lower(name)'), strtolower($line[3]));
-
-//                         if($chcat->exists()) {
-//                             $input['childcategory_id'] = $chcat->first()->id;
-//                         }
-//                     }
-
-
-
-//                 $input['photo'] = $line[5];
-//                 $input['name'] = $line[4];
-//                 $input['details'] = $line[6];
-//                $input['category_id'] = $request->category_id;
-//                $input['subcategory_id'] = $request->subcategory_id;
-//                $input['childcategory_id'] = $request->childcategory_id;
-//                 $input['color'] = $line[13];
-//                 $input['price'] = $line[7];
-//                 $input['previous_price'] = $line[8];
-//                 $input['stock'] = $line[9];
-//                 $input['size'] = $line[10];
-//                 $input['size_qty'] = $line[11];
-//                 $input['size_price'] = $line[12];
-//                 $input['youtube'] = $line[15];
-//                 $input['policy'] = $line[16];
-//                 $input['meta_tag'] = $line[17];
-//                 $input['meta_description'] = $line[18];
-//                 $input['tags'] = $line[14];
-//                 $input['product_type'] = $line[19];
-//                 $input['affiliate_link'] = $line[20];
-
-
-
-//                 // Conert Price According to Currency
-//                 $input['price'] = ($input['price'] / $sign->value);
-//                 $input['previous_price'] = ($input['previous_price'] / $sign->value);
-
-//                 // Save Data
-//                 $data->fill($input)->save();
-
-//                 // Set SLug
-//                 $prod = Product::find($data->id);
-
-//                 $prod->slug =  Str::slug($data->name,'-').'-'.strtolower($data->sku);
-
-//                 // Set Thumbnail
-
-
-//                 $img = Image::make($line[5])->resize(285, 285);
-//                 $thumbnail = time(). Str::random(8).'.jpg';
-//                 $img->save(public_path().'/assets/images/thumbnails/'.$thumbnail);
-//                 $prod->thumbnail  = $thumbnail;
-//                 $prod->update();
-
-
-//                 }else{
-//                     $log .= "<br>Row No: ".$i." - No Category Found!<br>";
-//                 }
-
-// }else{
-//     $log .= "<br>Row No: ".$i." - Duplicate Product Code!<br>";
-// }
-
-//             }
-
-//             $i++;
-
-//         }
-//         fclose($file);
-
-
-//         //--- Redirect Section
-//         $msg = 'Bulk Product File Imported Successfully.<a href="'.route('admin-prod-index').'">View Product Lists.</a>'.$log;
-//         return response()->json($msg);
-//     }
 
 public function importSubmit(Request $request)
 {
@@ -794,13 +659,27 @@ public function importSubmit(Request $request)
                     $input['meta_description'] = $line[18];
                     $input['tags'] = $line[14];
                     $input['product_type'] = $line[19];
-                    $input['affiliate_link'] = $line[20];
                     $input['price'] = ($input['price'] / $sign->value);
                     $input['previous_price'] = ($input['previous_price'] / $sign->value);
                     $data->fill($input)->save();
                     $prod = Product::find($data->id);
                     $prod->thumbnail = $line[5];
                     $prod->update();
+                    $input['gallery'] = $line[20];
+                    $lastid = $data->id;
+                    if (!empty($input['gallery'])) {
+                        $galleryFiles = explode(',', $input['gallery']);
+                        foreach ($galleryFiles as $fileName) {
+                            $cleanFileName = trim($fileName);
+                            if (!empty($cleanFileName)) {
+                                $gallery = new Gallery;
+                                $gallery['photo'] = $cleanFileName;
+                                $gallery['product_id'] = $lastid;
+                                $gallery->save();
+                            }
+                        }
+                    }
+                   // logic Section Ends
                 } else {
                     $log .= "<br>Row No: " . $i . " - No Category Found!<br>";
                 }
@@ -869,8 +748,58 @@ public function importImageSubmit(Request $request)
 }
 
 
+public function importgalleryImage(){
 
+    $cats = Category::all();
+    $sign = Currency::where('is_default','=',1)->first();
+    return view('admin.product.bulkgallery',compact('cats','sign'));
+}
 
+public function importgalleryImageSubmit(Request $request)
+{
+    $uploadedImages = [];
+    $existingImages = [];
+    $allowedExtensions = ['jpeg', 'jpg', 'png', 'svg'];
+
+    if ($files = $request->file('images')) {
+        foreach ($files as $file) {
+            $extension = $file->getClientOriginalExtension();
+
+            if (in_array($extension, $allowedExtensions)) {
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $filename = $originalName . '.' . $extension;
+                $filePath = public_path('assets/images/thumbnails/' . $filename);
+
+                if (!file_exists($filePath)) {
+                    $img = Image::make($file->getRealPath())->resize(285, 285);
+                    $img->save($filePath);
+                    $uploadedImages[] = $filename;
+                } else {
+                    $existingImages[] = $filename;
+                }
+
+                  $productPath = public_path('assets/images/galleries/' . $filename);
+                  if (!file_exists($productPath)) {
+                      $img = Image::make($file->getRealPath());
+                      $img->save($productPath);
+                  }
+            } else {
+            }
+        }
+    }
+
+    if (!empty($uploadedImages)) {
+        $msg = 'Image(s) Imported Successfully. <a href="' . route('admin-prod-index') . '">View Product Lists.</a>';
+    } else {
+        $msg = 'No valid images uploaded.';
+    }
+
+    if (!empty($existingImages)) {
+        $msg .= ' The following images were not uploaded because they already exist: ' . implode(', ', $existingImages) . '.';
+    }
+
+    return response()->json(['message' => $msg, 'uploadedImages' => $uploadedImages]);
+}
 
     //*** GET Request
     public function edit($id)
@@ -894,6 +823,7 @@ public function importImageSubmit(Request $request)
 
         //--- Validation Section
         $rules = [
+               'photo'      => 'required',
                'file'       => 'mimes:zip'
                 ];
 

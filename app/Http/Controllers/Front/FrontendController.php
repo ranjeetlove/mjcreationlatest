@@ -38,4 +38,50 @@ class FrontendController extends Controller
         $relatedproducts = Product::where('category_id', $product->category_id)->where('id', '!=', $product->id)->take(6)->get();
         return view('website.product-detail', compact('product', 'relatedproducts'));
     }
+
+    public function productlist($id)
+    {
+        $category = Category::find($id);
+        $catId = $id;
+
+        if (!$category) {
+            abort(404);
+        }
+
+
+        return view('website.shop', compact('category'));
+    }
+
+
+    public function sort(Request $request)
+    {
+
+        $sortBy = $request->input('sort_by');
+        $categoryId = $request->input('category_id');
+        $category = Category::where('id', $categoryId)
+            ->with(['products' => function ($query) use ($sortBy) {
+                $this->applySorting($query, $sortBy);
+            }])
+            ->first();
+        return view('website.response', compact('category'))->render();
+    }
+
+    private function applySorting($query, $sortBy)
+    {
+        switch ($sortBy) {
+            case 'lowToHigh':
+                $query->orderBy('product_measurment_quantity_price', 'asc');
+                break;
+            case 'highToLow':
+                $query->orderBy('product_measurment_quantity_price', 'desc');
+                break;
+            case 'rating':
+                $query->orderBy('rating', 'desc');
+                break;
+            case 'latest':
+            default:
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+    }
 }

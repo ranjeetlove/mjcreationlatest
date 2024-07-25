@@ -53,7 +53,10 @@
                 <a href="{{ route('admin-prod-import') }}"><span>{{ __('Product Upload') }}</span></a>
             </li>
             <li>
-                <a href="{{ route('admin-prod-imgae-import') }}"><span>{{ __('Product Image') }}</span></a>
+                <a href="{{ route('admin-prod-imgae-import') }}"><span>{{ __('Product Feature Image') }}</span></a>
+            </li>
+            <li>
+                <a href="{{ route('admin-prod-gallery-image-import') }}"><span>{{ __('Product Gallery Image') }}</span></a>
             </li>
         </ul>
     </li>

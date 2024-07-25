@@ -6,6 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\Sendemailvarificationotp;
+use App\Events\Sendphonevarificationotp;
+use App\Listeners\Otpsendtomailvarification;
+use App\Listeners\Otpsendtophonevarification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        Sendemailvarificationotp::class => [
+            Otpsendtomailvarification::class
+            ],
+            Sendphonevarificationotp::class => [
+            Otpsendtophonevarification::class
+            ],
     ];
 
     /**

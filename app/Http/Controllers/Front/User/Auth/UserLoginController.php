@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Models\User;
 use App\Models\Discount;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use App\Models\VendorProduct;
-use App\Models\Productcategory;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ProductPriceDetail;
 use App\Models\Product;
 
-class LoginController extends Controller
+class UserLoginController extends Controller
 {
     public function usersloginview()
     {
@@ -119,50 +119,6 @@ class LoginController extends Controller
         return redirect('/users/home');
     }
 
-    public function productlist($id)
-    {
-        $category = ProductCategory::find($id);
-        $catId = $id;
 
-        if (!$category) {
-            abort(404);
-        }
-
-
-        return view('website.shop', compact('category'));
-    }
-
-
-    public function sort(Request $request)
-    {
-
-        $sortBy = $request->input('sort_by');
-        $categoryId = $request->input('category_id');
-        $category = ProductCategory::where('id', $categoryId)
-            ->with(['vendorProducts' => function ($query) use ($sortBy) {
-                $this->applySorting($query, $sortBy);
-            }])
-            ->first();
-        return view('website.response', compact('category'))->render();
-    }
-
-    private function applySorting($query, $sortBy)
-    {
-        switch ($sortBy) {
-            case 'lowToHigh':
-                $query->orderBy('product_measurment_quantity_price', 'asc');
-                break;
-            case 'highToLow':
-                $query->orderBy('product_measurment_quantity_price', 'desc');
-                break;
-            case 'rating':
-                $query->orderBy('rating', 'desc');
-                break;
-            case 'latest':
-            default:
-                $query->orderBy('created_at', 'desc');
-                break;
-        }
-    }
 
 }
