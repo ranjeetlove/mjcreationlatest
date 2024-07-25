@@ -318,10 +318,11 @@ button:focus {
 }
 
 .sc-icon {
-    font-size: 18px !important;
+    font-size: 22px !important;
     transition: background-color 0.3s, color 0.3s;
     padding: 4px;
     border-radius: 50%;
+    color: #243164 !important;
 }
 
 .sc-icon:hover {
@@ -351,3 +352,118 @@ button:focus {
     align-items: center !important;
   }
 }
+
+
+/* nyupdate */
+.location{
+    font-size: 28px !important;
+    color: #ab8553;
+}
+.ft-title{
+    font-size: 20px !important;
+    font-weight: 500;
+}
+.f-about{
+    text-align: center;
+}
+.product-title-b{
+    font-size: 18px;
+    font-weight: 600;
+}
+.spha-img{
+    height: 12.5rem;
+}
+.telegram-icon{
+    width: 20px;
+    height: 20px;
+    /* background-color: #243164; */
+}
+.tele-subbtn{
+    background-color: #243164;
+    padding: 2px 5px;
+    border: none;
+    margin-left: -5px;
+}
+.subs-input{
+    border: none;
+    padding: 3px 0px;
+}
+.owl-prev1 {
+    left: 0px !important;
+}
+.owl-next1 {
+    right: 0px !important;
+}
+.btn-whishlist {
+    background-color: #243164 !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    margin-left: 5px;
+}
+.action-buttons{
+    display: flex;
+    justify-content: space-between !important;
+}
+.whish-prod {
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.list-icon{
+    width: 24px;
+    height: 24px;
+}
+
+.product-card1 {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+    .thumbnail {
+        width: 5.2rem;
+        height: 65px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .add-to-cart-form {
+        width: 90% !important;
+    }
+    .product-title{
+        margin-top: 10px;
+    }
+    .whish{
+        display: flex;
+    }
+    .f-about{
+        text-align: left;
+    }
+    .top-right-section{
+        display: block !important;
+    }
+    .top-sort{
+        display: block !important;
+        margin-top: 5px;
+    }
+    .top-section {
+        display: block;
+        /* justify-content: space-between; */
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .product-card1 {
+        display: block;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        background: #fff;
+    }
+}
+
+

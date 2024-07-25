@@ -229,17 +229,17 @@
 <section>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="sidebar-sec">
                     <h5>ON SALE</h5>
                     <div class="product-item">
-                        <img src="{{ asset('img/image25(1).png') }}" alt="Product 1" />
+                        <img src="{{ asset('img/image25(1).png') }}" alt="Product 1" class="spha-img"/>
                         <div class="product-info">
-                            <div class="product-title">
+                            <div class="product-title-b">
                                 Ganapathi Homam / Ganesh Homam / Gana homa / Ganesh Puja
                             </div>
                             <div class="product-product_measurment_quantity_price">₹ 499</div>
-                            <div class="product-icons mt-5">
+                            <div class="product-icons mt-4">
                                 <img src="{{ asset('img/shopping-cart (1).png') }}" alt=""
                                     class="productb-image" />
                                 <img src="{{ asset('img/eye (1).png') }}" alt="" />
@@ -247,13 +247,13 @@
                         </div>
                     </div>
                     <div class="product-item">
-                        <img src="{{ asset('img/image26.png') }}" alt="Product 2" />
+                        <img src="{{ asset('img/image26.png') }}" alt="Product 2" class="spha-img"/>
                         <div class="product-info">
-                            <div class="product-title">
+                            <div class="product-title-b">
                                 Citrine Mala / Sunehla Stone Mala 108 Beads (8 mm)
                             </div>
                             <div class="product-product_measurment_quantity_price">₹ 2,200</div>
-                            <div class="product-icons mt-5">
+                            <div class="product-icons mt-4">
                                 <img src="{{ asset('img/shopping-cart (1).png') }}" alt=""
                                     class="productb-image" />
                                 <img src="{{ asset('img/eye (1).png') }}" alt="" />
@@ -261,13 +261,13 @@
                         </div>
                     </div>
                     <div class="product-item" style="border-bottom: none">
-                        <img src="{{ asset('img/image27.png') }}" alt="Product 3" />
+                        <img src="{{ asset('img/image27.png') }}" alt="Product 3" class="spha-img"/>
                         <div class="product-info">
-                            <div class="product-title mt-2">
+                            <div class="product-title-b mt-2">
                                 Sphatika Mala / Spadikam Mala / Crystal Quartz Beads
                             </div>
                             <div class="product-product_measurment_quantity_price">₹ 2,200</div>
-                            <div class="product-icons mt-5">
+                            <div class="product-icons mt-4">
                                 <img src="{{ asset('img/shopping-cart (1).png') }}" alt=""
                                     class="productb-image" />
                                 <img src="{{ asset('img/eye (1).png') }}" alt="" />
@@ -276,7 +276,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-2"></div>
+            <div class="col-md-5">
                 <div class="info-section">
                     <img src="{{ asset('img/image 34.png') }}" alt="" class="mb-5" />
                     <p>CUSTOMER SERVICE</p>

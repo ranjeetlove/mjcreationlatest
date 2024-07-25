@@ -1,10 +1,20 @@
+<style>
+      .get-p{
+          font-size: 20px;
+        font-weight: 500;
+         }
+.sbt-btn {
+    font-weight: 600 !important;
+    background-color: #e4bd7d !important;
+    padding: 5px 75px !important;
+}
+</style>
 <section>
     <div class="container my-5">
         <div class="row">
             <div class="col-lg-4 left-box">
                 <h2 class="mt-4">Login/Sign up</h2>
-                <h6>Get access to your Orders, <br />Wishlist and Recommendations</h6>
-                <image src="{{ asset('img/user.png') }}" class="img-fluid user-img mt-4"></image>
+                <p class="get-p">Get access to your Orders, <br />Wishlist and </br> Recommendations</p>                <image src="{{ asset('img/user.png') }}" class="img-fluid user-img mt-4"></image>
             </div>
             <div class="col-lg-8 right-box">
                 <form>
@@ -61,7 +71,7 @@
                                 Verify Otp
                             </button>
 
-                            <p class="text-center"><b>Not received your code?</b></p>
+                            <p class="text-center mt-2"><b>Not received your code?</b></p>
                         </div>
                     </div>
                 </form>
