@@ -26,11 +26,11 @@
     border:1px solid #243164;
 }
 </style>
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row">
         <div class="col-lg-8">
             @foreach ($cart as $item)
-            <div class="product-card1 d-flex align-items-center mb-3">
+            <div class="product-card1 mb-3">
                 <img src="{{ asset('assets/images/products/' . $item['image']) }}" class="img-fluid" alt="Product Image" style="height: 180px;">
                 <div class="ml-3">
                     <h5>{{ $item['name'] }}</h5>
@@ -46,10 +46,10 @@
                         <div class="action-buttons">
                             <form action="{{ route('cart.remove') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="product_id" value="{{ $item['id'] }}">
-                                <button type="submit" class="btn btn-outline-secondary ml-2 remove">Remove</button>
+                                <input type="hidden" name="product_id" value="{{ $item['id'] }}" >
+                                <button type="submit" class="btn btn-outline-secondary ms-2 remove">Remove</button>
                             </form>
-                            <button class="btn btn-outline-secondary ml-2 save-for-later" data-product-id="{{ $item['id'] }}">Save for later</button>
+                            <button class="btn btn-outline-secondary ms-2 save-for-later" data-product-id="{{ $item['id'] }}">Save for later</button>
                         </div>
                     </div>
                 </div>

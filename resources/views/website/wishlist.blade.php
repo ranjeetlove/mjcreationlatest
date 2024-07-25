@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container">
-            <div class="row">
+            <div class="row mt-3">
                 <span>Home > Wishlist</span>
             </div>
             <div class="row">
@@ -11,7 +11,7 @@
                     @if ($wishlists->count() > 0)
                         @foreach ($wishlists as $wishlist)
                             <div>
-                                <div class="whish-prod mt-5">
+                                <div class="whish-prod my-5">
                                     <a href="{{ route('product-detail', ['id' => $wishlist->product->id]) }}">
                                         <img src="{{ asset('assets/images/products/' . $wishlist->product->photo) }}"
                                             class="mcard-img" alt="{{ $wishlist->product->name }}" />
@@ -20,7 +20,7 @@
                                         {{ $wishlist->product->name }}<br />
                                         ₹ {{ $wishlist->product->price }}
                                     </p>
-                                    <div class="trash-icon">
+                                    <div class="trash-icon pe-4">
                                         <form method="POST" action="{{ route('wishlist.remove', $wishlist->id) }}">
                                             @csrf
                                             @method('DELETE')

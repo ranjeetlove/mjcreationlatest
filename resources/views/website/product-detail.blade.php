@@ -101,7 +101,7 @@
                             <span><img src="{{ asset('img/compare-icon.png') }}" alt="compare-icon" /></span>Compare
                         </div>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-2 ms-2">
                         <b>Features & Details</b>
                         <ul>
                             <li>It has a pleasing aroma</li>

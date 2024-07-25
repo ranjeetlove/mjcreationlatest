@@ -51,7 +51,7 @@
             <div class="top-section">
                 <div>Showing {{ $category->products->count() }} results;</div>
                 <div class="top-right-section">
-                    <div>
+                    <div class="top-sort">
                         Sort:
                         <select class="custom-select" id="sortSelect" data-category-id="{{ $category->id }}">
                             <option selected value="latest">Sort by latest</option>
@@ -60,7 +60,7 @@
                             <option value="rating">Rating</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="top-sort ms-2">
                         Show:
                         <select class="custom-select">
                             <option selected>20 items</option>
@@ -70,15 +70,17 @@
                         </select>
                     </div>
                     <div>
-                        <button class="btn btn-light" id="grid-view-btn"><i class="fas fa-th"></i></button>
-                        <button class="btn btn-light" id="list-view-btn"><i class="fas fa-bars"></i></button>
+                        <button class="btn btn-light" id="grid-view-btn"><img src="{{ asset('img/Link.png')}}" class="list-icon"></img></button>
+                        <button class="btn btn-light" id="list-view-btn"><img src="{{ asset('img/List.png')}}" class="list-icon"></img></button>
                     </div>
                 </div>
             </div>
-            <div class="row product-listing equal-height" id="productListings">
+            <div class="row product-listing grid-view" id="productListings">
                 @if ($category->count() > 0)
                 @foreach ($category->products as $product)
-                    <div class="col-md-4 product-card">
+                    <div class="col-md-4 product-card-container">
+                        <div class="product-card">
+
                         <a href="{{ route('product-detail', ['id' => $product->id]) }}">
                             <img src="{{ asset($product->photo ? 'assets/images/products/' . $product->photo : 'assets/images/default-product.jpg') }}"
                                 class="shop-pimage" /> <!-- Placeholder image -->
@@ -103,6 +105,7 @@
                             <button class="btn btn-whishlist"
                                         data-product-id="{{ $product->id }}">Wishlist</button>
                         </div>
+                        </div>
 
                     </div>
                 @endforeach
@@ -122,41 +125,23 @@
 $(document).ready(function() {
     $('#grid-view-btn').on('click', function() {
         $('#productListings').removeClass('list-view').addClass('grid-view');
+        $('.product-card-container').removeClass('col-md-12').addClass('col-md-4');
     });
 
     $('#list-view-btn').on('click', function() {
         $('#productListings').removeClass('grid-view').addClass('list-view');
+        $('.product-card-container').removeClass('col-md-4').addClass('col-md-12');
     });
 });
 </script>
 
 <style>
-    /* Default grid view */
-.product-card {
+/* Default grid view */
+.grid-view .product-card {
     margin-bottom: 30px;
 }
 
 /* List view */
-.list-view .product-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.list-view .product-card img {
-    max-width: 150px;
-    margin-right: 20px;
-}
-
-.list-view .product-card h5 {
-    font-size: 1.5rem;
-}
-
-.grid-view .product-card {
-    width: 100%;
-    margin-bottom: 30px;
-}
-
 .list-view .product-card {
     display: flex;
     flex-direction: row;
