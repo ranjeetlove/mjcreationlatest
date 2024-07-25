@@ -49,7 +49,7 @@
         <!-- Product Listing -->
         <div class="col-md-9">
             <div class="top-section">
-                <div>Showing {{ $category->vendorProducts->count() }} results;</div>
+                <div>Showing {{ $category->products->count() }} results;</div>
                 <div class="top-right-section">
                     <div>
                         Sort:
@@ -76,17 +76,17 @@
                 </div>
             </div>
             <div class="row product-listing equal-height" id="productListings">
-                @if ($category->vendorProducts->count() > 0)
-                @foreach ($category->vendorProducts as $product)
+                @if ($category->count() > 0)
+                @foreach ($category->products as $product)
                     <div class="col-md-4 product-card">
                         <a href="{{ route('product-detail', ['id' => $product->id]) }}">
-                            <img src="{{ asset('img/' . $product->product_banner_image) }}"
+                            <img src="{{ asset($product->photo ? 'assets/images/products/' . $product->photo : 'assets/images/default-product.jpg') }}"
                                 class="shop-pimage" /> <!-- Placeholder image -->
                         </a>
 
                         <h5>{{ $product->product_title }}</h5>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="price">₹{{ $product->product_measurment_quantity_price }}</div>
+                            <div class="price">₹{{ $product->price }}</div>
                             <div class="stock-status">IN STOCK</div>
                         </div>
                         <div class="rating-div">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Front\User\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class RegistrationController extends Controller
     public function register(Request $request){
 
 
-          mergerequestoremailorphone_no($request);
+          $this->mergerequestoremailorphone_no($request);
             $validator = Validator::make($request->all(), [
                 'phone_no' => 'sometimes|required|string|max:255|unique:users,phone_no',
                 'email' => 'sometimes|required|string|email|max:255|unique:users,email',
@@ -81,11 +81,20 @@ class RegistrationController extends Controller
 
     }
 
+    private function mergerequestoremailorphone_no(Request $request)
+    {
+        // Define this function to merge email or phone number into user_contact
+        if ($request->has('email')) {
+            $request->merge(['user_contact' => $request->email]);
+        } elseif ($request->has('phone_no')) {
+            $request->merge(['user_contact' => $request->phone_no]);
+        }
+    }
 
     public function verifiedOtp(Request $request)
     {
 
-        mergerequestoremailorphone_no($request);
+        $this->mergerequestoremailorphone_no($request);
 
         $otp1 = $request->input('otp1');
         $otp2 = $request->input('otp2');

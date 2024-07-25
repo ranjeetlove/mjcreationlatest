@@ -182,7 +182,7 @@
                     <image src="{{ asset('img/user.png') }}" class="img-fluid user-img mt-4"></image>
                 </div>
                 <div class="col-lg-8 right-box">
-                    <form action="{{ route('users-registration') }}" method="POST" id="user-registration-form">
+                    <form action="#" id="user-registration-form">
                         @csrf
                         <div class="form-group">
                             <label for="user_contact"><b>Enter Your Mobile No./ Email</b></label>
@@ -197,6 +197,8 @@
                             @enderror
                         </div>
                         <!-- form -->
+                        {{-- {{ route('users-registration') }} --}}
+                        {{-- method="POST"  --}}
                         {{-- <div class="form-group">
                             <label for="login-mobile" class="font-weight-bold text-dark">Mobile</label>
                             <div class="input-group input-group-sm">
@@ -465,10 +467,6 @@
 
                         otpFieldScript();
                         otpLifeTime();
-
-
-
-
 
 
                     },

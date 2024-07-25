@@ -31,7 +31,7 @@
         <div class="col-lg-8">
             @foreach ($cart as $item)
             <div class="product-card1 d-flex align-items-center mb-3">
-                <img src="{{ asset('assets/images/products/' . $item['image']) }}" class="img-fluid" alt="Product Image">
+                <img src="{{ asset('assets/images/products/' . $item['image']) }}" class="img-fluid" alt="Product Image" style="height: 180px;">
                 <div class="ml-3">
                     <h5>{{ $item['name'] }}</h5>
                     <p>Seller: NiraFragrances</p>

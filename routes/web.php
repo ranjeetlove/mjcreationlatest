@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\FaqController;
@@ -50,13 +49,13 @@ use App\Http\Controllers\Admin\PaymentGatewayController;
 use App\Http\Controllers\Admin\SubChildCategoryController;
 use App\Http\Controllers\Front\Vendor\Auth\LoginController as VendorLoginController;
 use App\Http\Controllers\Front\Vendor\Auth\RegistrationController as VendorRegistrationController;
-use App\Http\Controllers\User\Auth\RegistrationController;
+use App\Http\Controllers\Front\User\Auth\RegistrationController;
 use App\Http\Controllers\Front\CatalogController;
 use App\Http\Controllers\Front\FrontendController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
-
 use App\Http\Controllers\Front\WishlistController;
+use App\Http\Controllers\Front\User\Auth\UserLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -349,6 +348,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/products/import-submit', [ProductController::class, 'importSubmit'])->name('admin-prod-importsubmit');
         Route::get('/products/image-import', [ProductController::class, 'importImage'])->name('admin-prod-imgae-import');
         Route::post('/products/image-import-submit', [ProductController::class, 'importImageSubmit'])->name('admin-prod-image-importsubmit');
+        Route::get('/products/image-gallery-import', [ProductController::class, 'importgalleryImage'])->name('admin-prod-gallery-image-import');
+        Route::post('/products/image-galleryimport-submit', [ProductController::class, 'importgalleryImageSubmit'])->name('admin-prod-gallery-image-importsubmit');
     });
     // ADMIN CSV IMPORT SECTION ENDS
 
@@ -779,17 +780,13 @@ Route::post('users/registration', [RegistrationController::class, 'register'])->
 
 Route::get('users/verification', [RegistrationController::class, 'verificationview']);
 
-Route::post('users/registration', [RegistrationController::class, 'register'])->name('users-registration');
-
-Route::get('users/verification', [RegistrationController::class, 'verificationview']);
-
-Route::get('users/login', [LoginController::class, 'usersloginview'])->name('users-login');
+Route::get('users/login', [UserLoginController::class, 'usersloginview'])->name('users-login');
 
 Route::post('users/otpverification', [RegistrationController::class, 'verifiedOtp'])->name('user-otpverification');
 
 Route::post('users/otpresend', [RegistrationController::class, 'otpresend'])->name('user-otpresend');
 
-Route::post('users/authlogin', [LoginController::class, 'usersauthlogin'])->name('users-auth-login');
+Route::post('users/authlogin', [UserLoginController::class, 'usersauthlogin'])->name('users-auth-login');
 
 
 Route::get('users/home', [FrontendController::class, 'index'])->name('users-home-view');
@@ -813,27 +810,23 @@ Route::delete('/wishlist/{id}', [WishlistController::class, 'remove'])->name('wi
 
 
 
-Route::get('product/checkout',[LoginController::class,'checkout'])->name('product-checkout');
+Route::get('product/checkout',[UserLoginController::class,'checkout'])->name('product-checkout');
 
-Route::get('/product/list/{id}', [LoginController::class, 'productlist'])->name('product-list');
+Route::get('/product/list/{id}', [FrontendController::class, 'productlist'])->name('product-list');
 
-Route::get('/products/sort', [LoginController::class, 'sort'])->name('products.sort');
+Route::get('/products/sort', [FrontendController::class, 'sort'])->name('products.sort');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [UserLoginController::class, 'logout'])->name('logout');
+
+
+
 
 
 Route::get('/extras', [FrontendController::class, 'extraIndex'])->name('front.extraIndex');
 Route::get('/currency/{id}', [FrontendController::class, 'currency'])->name('front.currency');
 Route::get('/language/{id}', [FrontendController::class, 'language'])->name('front.language');
 
-// BLOG SECTION
-Route::get('/blog', [FrontendController::class, 'blog'])->name('front.blog');
-Route::get('/blog/{id}', [FrontendController::class, 'blogshow'])->name('front.blogshow');
-Route::get('/blog/category/{slug}', [FrontendController::class, 'blogcategory'])->name('front.blogcategory');
-Route::get('/blog/tag/{slug}', [FrontendController::class, 'blogtags'])->name('front.blogtags');
-Route::get('/blog-search', [FrontendController::class, 'blogsearch'])->name('front.blogsearch');
-Route::get('/blog/archive/{slug}', [FrontendController::class, 'blogarchive'])->name('front.blogarchive');
-// BLOG SECTION ENDS
+
 // FAQ SECTION
 Route::get('/faq', [FrontendController::class, 'faq'])->name('front.faq');
 // FAQ SECTION ENDS
