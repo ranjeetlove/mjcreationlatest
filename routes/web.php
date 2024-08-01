@@ -882,4 +882,9 @@ Route::get('/{slug}', [FrontendController::class, 'page'])->name('front.page');
 Route::get('/users/faq', [FrontendController::class, 'faq'])->name('front.faq');
 Route::get('/users/profile', [FrontendController::class, 'profile'])->name('front.profile');
 Route::get('/users/contact', [FrontendController::class, 'contact'])->name('front.contact');
+Route::get('/users/checkout', [FrontendController::class, 'checkout'])->name('front.checkout');
+Route::get('/users/orders', [FrontendController::class, 'orders'])->name('front.orders');
+Route::get('/user/order/details', [FrontendController::class, 'ordersdetail'])->name('front.ordersdetail');
+Route::get('/users/vendor/registration', [FrontendController::class, 'vendorregistration'])->name('front.vendorregistration');
+Route::get('/users/myaccount', [FrontendController::class, 'myaccount'])->name('front.myaccount');
 
