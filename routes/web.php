@@ -827,12 +827,7 @@ Route::get('/currency/{id}', [FrontendController::class, 'currency'])->name('fro
 Route::get('/language/{id}', [FrontendController::class, 'language'])->name('front.language');
 
 
-// FAQ SECTION
-Route::get('/faq', [FrontendController::class, 'faq'])->name('front.faq');
-// FAQ SECTION ENDS
-
 // CONTACT SECTION
-Route::get('/contact', [FrontendController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontendController::class, 'contactemail'])->name('front.contact.submit');
 Route::get('/contact/refresh_code', [FrontendController::class, 'refresh_code']);
 // CONTACT SECTION  ENDS
@@ -841,17 +836,7 @@ Route::get('/contact/refresh_code', [FrontendController::class, 'refresh_code'])
 Route::get('/autosearch/product/{slug}', [FrontendController::class, 'autosearch']);
 // PRODCT AUTO SEARCH SECTION ENDS
 
-// CATEGORY SECTION
-Route::get('/category/{category?}/{subcategory?}/{childcategory?}', [CatalogController::class, 'category'])->name('front.category');
-Route::get('/category/{slug1}/{slug2}', [CatalogController::class, 'subcategory'])->name('front.subcat');
-Route::get('/category/{slug1}/{slug2}/{slug3}', [CatalogController::class, 'childcategory'])->name('front.childcat');
-Route::get('/categories', [CatalogController::class, 'categories'])->name('front.categories');
-Route::get('/childcategories/{slug}', [CatalogController::class, 'childcategories'])->name('front.childcategories');
-// CATEGORY SECTION ENDS
 
-// TAG SECTION
-Route::get('/tag/{slug}', [CatalogController::class, 'tag'])->name('front.tag');
-// TAG SECTION ENDS
 
 // SEARCH SECTION
 Route::get('/search', [CatalogController::class, 'search'])->name('front.search');
@@ -863,12 +848,6 @@ Route::get('/item/quick/view/{id}', [CatalogController::class, 'quick'])->name('
 Route::post('/item/review', [CatalogController::class, 'reviewsubmit'])->name('front.review.submit');
 Route::get('/item/view/review/{id}', [CatalogController::class, 'reviews'])->name('front.reviews');
 // PRODUCT SECTION ENDS
-
-// COMMENT SECTION
-Route::post('/item/comment/store', [CatalogController::class, 'comment'])->name('product.comment');
-Route::post('/item/comment/edit/{id}', [CatalogController::class, 'commentedit'])->name('product.comment.edit');
-Route::get('/item/comment/delete/{id}', [CatalogController::class, 'commentdelete'])->name('product.comment.delete');
-// COMMENT SECTION ENDS
 
 // REPORT SECTION
 Route::post('/item/report', [CatalogController::class, 'report'])->name('product.report');
@@ -900,4 +879,7 @@ Route::get('/{slug}', [FrontendController::class, 'page'])->name('front.page');
 // PAGE SECTION ENDS
 
 
-Route::get('/my-profile', [NarendraController::class, 'narendraController'])->name('front.narendraController');
+Route::get('/users/faq', [FrontendController::class, 'faq'])->name('front.faq');
+Route::get('/users/profile', [FrontendController::class, 'profile'])->name('front.profile');
+Route::get('/users/contact', [FrontendController::class, 'contact'])->name('front.contact');
+

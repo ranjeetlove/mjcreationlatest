@@ -12,7 +12,7 @@ use App\Models\Withdraw;
 use App\Models\Currency;
 use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Input;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Auth;
 
 class VendorController extends Controller
@@ -26,7 +26,7 @@ class VendorController extends Controller
 	    public function datatables()
 	    {
 	        $datas = User::where('is_vendor','=',2)->orWhere('is_vendor','=',1)->orderBy('id','desc')->get();
-	         //--- Integrating This Collection Into Datatables
+              //--- Integrating This Collection Into Datatables
 	         return Datatables::of($datas)
                                 ->addColumn('status', function(User $data) {
                                     $class = $data->is_vendor == 2 ? 'drop-success' : 'drop-danger';
@@ -35,10 +35,10 @@ class VendorController extends Controller
                                     return '<div class="action-list"><select class="process select vendor-droplinks '.$class.'">'.
                 '<option value="'. route('admin-vendor-st',['id1' => $data->id, 'id2' => 2]).'" '.$s.'>Activated</option>'.
                 '<option value="'. route('admin-vendor-st',['id1' => $data->id, 'id2' => 1]).'" '.$ns.'>Deactivated</option></select></div>';
-                                }) 
+                                })
 	                            ->addColumn('action', function(User $data) {
-	                                return '<div class="godropdown"><button class="go-dropdown-toggle"> Actions<i class="fas fa-chevron-down"></i></button><div class="action-list"><a href="' . route('admin-vendor-secret',$data->id) . '" > <i class="fas fa-user"></i> Secret Login</a><a href="javascript:;" data-href="' . route('admin-vendor-verify',$data->id) . '" class="verify" data-toggle="modal" data-target="#verify-modal"> <i class="fas fa-question"></i> Ask For Verification</a><a href="' . route('admin-vendor-show',$data->id) . '" > <i class="fas fa-eye"></i> Details</a><a data-href="' . route('admin-vendor-edit',$data->id) . '" class="edit" data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i> Edit</a><a href="javascript:;" class="send" data-email="'. $data->email .'" data-toggle="modal" data-target="#vendorform"><i class="fas fa-envelope"></i> Send Email</a><a href="javascript:;" data-href="' . route('admin-vendor-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i> Delete</a></div></div>';
-	                            }) 
+	                                return '<div class="godropdown"><button class="go-dropdown-toggle"> Actions<i class="fas fa-chevron-down"></i></button><div class="action-list"><a href="' . route('admin-vendor-secret',$data->id) . '" > <i class="fas fa-user"></i> Secret Login</a><a href="javascript:;" data-href="' . route('admin-vendor-verify',$data->id) . '" class="verify" data-toggle="modal" data-target="#verify-modal"> <i class="fas fa-question"></i> Ask For Verification</a><a href="' . route('admin-vendor-show',$data->id) . '" > <i class="fas fa-eye"></i> Details</a><a data-href="' . route('admin-vendor-edit',$data->id) . '" class="edit" data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i> Edit</a><a href="javascript:;" data-href="' . route('admin-vendor-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i> Delete</a></div></div>';
+	                            })
 	                            ->rawColumns(['status','action'])
 	                            ->toJson(); //--- Returning Json Data To Client Side
 	    }
@@ -70,14 +70,14 @@ class VendorController extends Controller
                             ->editColumn('txnid', function(UserSubscription $data) {
                                 $txnid = $data->txnid == null ? 'Free' : $data->txnid;
                                 return $txnid;
-                            }) 
+                            })
                             ->editColumn('created_at', function(UserSubscription $data) {
                                 $date = $data->created_at->diffForHumans();
                                 return $date;
-                            }) 
+                            })
                             ->addColumn('action', function(UserSubscription $data) {
                                 return '<div class="action-list"><a data-href="' . route('admin-vendor-sub',$data->id) . '" class="view details-width" data-toggle="modal" data-target="#modal1"> <i class="fas fa-eye"></i>Details</a></div>';
-                            }) 
+                            })
                             ->rawColumns(['action'])
                             ->toJson(); //--- Returning Json Data To Client Side
 
@@ -105,10 +105,10 @@ class VendorController extends Controller
         $user = User::findOrFail($id1);
         $user->is_vendor = $id2;
         $user->update();
-        //--- Redirect Section        
+        //--- Redirect Section
         $msg[0] = 'Status Updated Successfully.';
-        return response()->json($msg);      
-        //--- Redirect Section Ends    
+        return response()->json($msg);
+        //--- Redirect Section Ends
 
     }
 
@@ -147,7 +147,7 @@ class VendorController extends Controller
                         'onumber' => "",
                     ];
                     $mailer = new GeniusMailer();
-                    $mailer->sendAutoMail($data);        
+                    $mailer->sendAutoMail($data);
                     }
                     else
                     {
@@ -156,7 +156,7 @@ class VendorController extends Controller
                     }
 
         $msg = 'Verification Request Sent Successfully.';
-        return response()->json($msg);   
+        return response()->json($msg);
     }
 
 
@@ -171,8 +171,8 @@ class VendorController extends Controller
                 'shop_name.unique' => 'Shop Name "'.$request->shop_name.'" has already been taken. Please choose another name.'
             ];
 
-         $validator = Validator::make(Input::all(), $rules,$customs);
-         
+            $validator = Validator::make($request->all(), $rules, $customs);
+
          if ($validator->fails()) {
            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
          }
@@ -182,7 +182,7 @@ class VendorController extends Controller
         $data = $request->all();
         $user->update($data);
         $msg = 'Vendor Information Updated Successfully.';
-        return response()->json($msg);   
+        return response()->json($msg);
     }
 
 	//*** GET Request
@@ -191,17 +191,17 @@ class VendorController extends Controller
         $data = User::findOrFail($id);
         return view('admin.vendor.show',compact('data'));
     }
-    
+
 
     //*** GET Request
     public function secret($id)
     {
         Auth::guard('web')->logout();
         $data = User::findOrFail($id);
-        Auth::guard('web')->login($data); 
+        Auth::guard('web')->login($data);
         return redirect()->route('vendor-dashboard');
     }
-    
+
 
 	//*** GET Request
     public function destroy($id)
@@ -223,10 +223,10 @@ class VendorController extends Controller
                 $gal->delete();
             }
         }
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Vendor Deleted Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends    
+            return response()->json($msg);
+            //--- Redirect Section Ends
     }
 
         //*** JSON Request
@@ -238,24 +238,24 @@ class VendorController extends Controller
                                 ->addColumn('name', function(Withdraw $data) {
                                     $name = $data->user->name;
                                     return '<a href="' . route('admin-vendor-show',$data->user->id) . '" target="_blank">'. $name .'</a>';
-                                }) 
+                                })
                                 ->addColumn('email', function(Withdraw $data) {
                                     $email = $data->user->email;
                                     return $email;
-                                }) 
+                                })
                                 ->addColumn('phone', function(Withdraw $data) {
                                     $phone = $data->user->phone;
                                     return $phone;
-                                }) 
+                                })
                                 ->editColumn('status', function(Withdraw $data) {
                                     $status = ucfirst($data->status);
                                     return $status;
-                                }) 
+                                })
                                 ->editColumn('amount', function(Withdraw $data) {
                                     $sign = Currency::where('is_default','=',1)->first();
                                     $amount = $sign->sign.round($data->amount * $sign->value , 2);
                                     return $amount;
-                                }) 
+                                })
                                 ->addColumn('action', function(Withdraw $data) {
                                     $action = '<div class="action-list"><a data-href="' . route('admin-vendor-withdraw-show',$data->id) . '" class="view details-width" data-toggle="modal" data-target="#modal1"> <i class="fas fa-eye"></i> Details</a>';
                                     if($data->status == "pending") {
@@ -263,7 +263,7 @@ class VendorController extends Controller
                                     }
                                     $action .= '</div>';
                                     return $action;
-                                }) 
+                                })
                                 ->rawColumns(['name','action'])
                                 ->toJson(); //--- Returning Json Data To Client Side
         }
@@ -274,7 +274,7 @@ class VendorController extends Controller
             return view('admin.vendor.withdraws');
         }
 
-        //*** GET Request       
+        //*** GET Request
         public function withdrawdetails($id)
         {
             $sign = Currency::where('is_default','=',1)->first();
@@ -282,19 +282,19 @@ class VendorController extends Controller
             return view('admin.vendor.withdraw-details',compact('withdraw','sign'));
         }
 
-        //*** GET Request   
+        //*** GET Request
         public function accept($id)
         {
             $withdraw = Withdraw::findOrFail($id);
             $data['status'] = "completed";
             $withdraw->update($data);
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Withdraw Accepted Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends   
+            return response()->json($msg);
+            //--- Redirect Section Ends
         }
 
-        //*** GET Request   
+        //*** GET Request
         public function reject($id)
         {
             $withdraw = Withdraw::findOrFail($id);
@@ -303,10 +303,10 @@ class VendorController extends Controller
             $account->update();
             $data['status'] = "rejected";
             $withdraw->update($data);
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Withdraw Rejected Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends   
+            return response()->json($msg);
+            //--- Redirect Section Ends
         }
 
 }

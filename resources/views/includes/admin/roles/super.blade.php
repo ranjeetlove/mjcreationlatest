@@ -65,6 +65,8 @@
 
 
 
+
+
         <li>
             <a href="#order" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false"><i class="fas fa-hand-holding-usd"></i>{{ __('Orders') }}</a>
             <ul class="collapse list-unstyled" id="order" data-parent="#accordion" >
@@ -87,3 +89,28 @@
             </ul>
         </li>
 
+        <li>
+            <a href="#vendor" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+                <i class="icofont-ui-user-group"></i>{{ __('Vendors') }}
+            </a>
+            <ul class="collapse list-unstyled" id="vendor" data-parent="#accordion">
+                <li>
+                    <a href="{{ route('admin-vendor-index') }}"><span>{{ __('Vendors List') }}</span></a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li>
+            <a href="#vendor1" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
+                    <i class="icofont-verification-check"></i>{{ __('Vendor Verifications') }}
+            </a>
+            <ul class="collapse list-unstyled" id="vendor1" data-parent="#accordion">
+                <li>
+                    <a href="{{ route('admin-vr-index') }}"><span>{{ __('All Verifications') }}</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('admin-vr-pending') }}"><span>{{ __('Pending Verifications') }}</span></a>
+                </li>
+            </ul>
+        </li>

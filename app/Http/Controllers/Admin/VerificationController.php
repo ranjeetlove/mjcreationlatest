@@ -23,7 +23,7 @@ class VerificationController extends Controller
         else{
            $datas = Verification::where('status','!=','Pending')->get();
         }
-         
+
          return Datatables::of($datas)
                             ->addColumn('name', function(Verification $data) {
                                 $name = isset($data->user->owner_name) ? '<a href="'. route('admin-vendor-show',$data->user->id) .'" target="_blank">'.$data->user->owner_name.'</a>' : 'Removed';
@@ -45,10 +45,10 @@ class VerificationController extends Controller
                                  '<option value="'. route('admin-vr-st',['id1' => $data->id, 'id2' => 'Pending']).'" '.$s.'>Pending</option>'.
                                 '<option value="'. route('admin-vr-st',['id1' => $data->id, 'id2' => 'Verified']).'" '.$s.'>Verified</option>'.
                                 '<option value="'. route('admin-vr-st',['id1' => $data->id, 'id2' => 'Declined']).'" '.$ns.'>Declined</option></select></div>';
-                            }) 
+                            })
                             ->addColumn('action', function(Verification $data) {
                                 return '<div class="action-list"><a href="javascript:;" class="set-gallery" data-toggle="modal" data-target="#setgallery"><input type="hidden" value="'.$data->id.'"><i class="fas fa-paperclip"></i> View Attachments</a><a href="javascript:;" data-href="' . route('admin-vr-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i></a></div>';
-                            }) 
+                            })
                             ->rawColumns(['name','status','action'])
                             ->toJson(); //--- Returning Json Data To Client Side
     }
@@ -77,8 +77,8 @@ class VerificationController extends Controller
             $data[3] = ''.route('admin-vr-st',['id1' => $prod1->id, 'id2' => 'Verified']).'';
             $data[4] = ''.route('admin-vr-st',['id1' => $prod1->id, 'id2' => 'Declined']).'';
         }
-        return response()->json($data);              
-    }  
+        return response()->json($data);
+    }
 
 
     public function edit($id)
@@ -101,12 +101,12 @@ class VerificationController extends Controller
             $input['status'] = "completed";
             $data->update($input);
             //--- Logic Section Ends
-    
 
-        //--- Redirect Section          
+
+        //--- Redirect Section
         $msg = 'Status Updated Successfully.';
-        return response()->json($msg);    
-        //--- Redirect Section Ends     
+        return response()->json($msg);
+        //--- Redirect Section Ends
 
     }
 
@@ -117,10 +117,10 @@ class VerificationController extends Controller
         $user = Verification::findOrFail($id1);
         $user->status = $id2;
         $user->update();
-        //--- Redirect Section        
+        //--- Redirect Section
         $msg[0] = 'Status Updated Successfully.';
-        return response()->json($msg);      
-        //--- Redirect Section Ends    
+        return response()->json($msg);
+        //--- Redirect Section Ends
 
     }
 
@@ -134,10 +134,10 @@ class VerificationController extends Controller
             unlink(public_path().'/assets/images/attachments/'.$photo);
         }
         $data->delete();
-        //--- Redirect Section     
+        //--- Redirect Section
         $msg = 'Data Deleted Successfully.';
-        return response()->json($msg);      
-        //--- Redirect Section Ends    
+        return response()->json($msg);
+        //--- Redirect Section Ends
 
     }
 

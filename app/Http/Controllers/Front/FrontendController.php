@@ -84,4 +84,22 @@ class FrontendController extends Controller
                 break;
         }
     }
+
+	public function faq()
+	{
+
+		return view('front.faq');
+	}
+	public function profile()
+	{
+
+		return view('front.profile');
+	}
+
+    public function contact()
+	{
+
+		return view('front.contact');
+	}
+
 }

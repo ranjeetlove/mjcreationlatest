@@ -1,6 +1,6 @@
-@extends('layouts.admin') 
+@extends('layouts.admin')
 
-@section('content')  
+@section('content')
 					<input type="hidden" id="headerdata" value="{{ __("VENDOR") }}">
 					<div class="content-area">
 						<div class="mr-breadcrumb">
@@ -39,15 +39,18 @@
 
 
 									<div class="mr-table allproduct">
-										@include('includes.admin.form-success') 
+										@include('includes.admin.form-success')
 										<div class="table-responsiv">
 												<table id="geniustable" class="table table-hover dt-responsive" cellspacing="0" width="100%">
 													<thead>
 														<tr>
-		                                                  <th>{{ __("Store Name") }}</th>
-		                                                  <th>{{ __("Vendor Email") }}</th>
+		                                                  <th>{{ __("Name") }}</th>
+		                                                  <th>{{ __("Email") }}</th>
+		                                                  <th>{{ __("Phone") }}</th>
+														  <th>{{ __("Store Name") }}</th>
 		                                                  <th>{{ __("Shop Number") }}</th>
 		                                                  <th>{{ __("Status") }}</th>
+														  <!-- <th>{{ __("Status Verified") }}</th> -->
 		                                                  <th>{{ __("Options") }}</th>
 														</tr>
 													</thead>
@@ -62,7 +65,7 @@
 {{-- ADD / EDIT MODAL --}}
 
 			<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
-										
+
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 												<div class="submit-loader">
@@ -91,7 +94,7 @@
 {{-- VERIFICATION MODAL --}}
 
 <div class="modal fade" id="verify-modal" tabindex="-1" role="dialog" aria-labelledby="modal1" aria-hidden="true">
-										
+
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="submit-loader">
@@ -224,7 +227,7 @@
 
 {{-- MESSAGE MODAL ENDS --}}
 
-@endsection    
+@endsection
 
 @section('scripts')
 
@@ -238,9 +241,12 @@
                serverSide: true,
                ajax: '{{ route('admin-vendor-datatables') }}',
                columns: [
-                        { data: 'shop_name', name: 'shop_name' },
+						{ data: 'name', name: 'name' },
                         { data: 'email', name: 'email' },
+						{ data: 'phone', name: 'phone' },
+						{ data: 'shop_name', name: 'shop_name' },
                         { data: 'shop_number', name: 'shop_number' },
+						// { data: 'shop_number', name: 'shop_number' },
                         { data: 'status', searchable: false, orderable: false},
             			{ data: 'action', searchable: false, orderable: false }
                      ],
@@ -248,12 +254,12 @@
                 	processing: '<img src="{{asset('assets/images/'.$gs->admin_loader)}}">'
                 },
 				drawCallback : function( settings ) {
-	    				$('.select').niceSelect();	
+	    				$('.select').niceSelect();
 				}
             });
 
-	    				$('.select1').niceSelect();	
-																
+	    				$('.select1').niceSelect();
+
     </script>
 
 
@@ -279,5 +285,5 @@ if(admin_loader == 1)
 </script>
 
 {{-- DATA TABLE --}}
-    
-@endsection   
+
+@endsection
