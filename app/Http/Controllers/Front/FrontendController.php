@@ -113,21 +113,21 @@ class FrontendController extends Controller
 
 		return view('front.orders');
 	}
-    public function ordersdetail()
+    public function ordersDetail()
 	{
 
-		return view('front.ordersdetail');
+		return view('front.order-details');
 	}
-    public function vendorregistration()
+    public function vendorRegistration()
 	{
 
-		return view('front.vendorregistration');
+		return view('front.vendor-registration');
 	}
 
-    public function myaccount()
+    public function myAccount()
 	{
 
-		return view('front.myaccount');
+		return view('front.my-account');
 	}
 
 }
