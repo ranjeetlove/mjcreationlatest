@@ -46,7 +46,7 @@ table#example2 {
                                                             @if($data->is_provider == 1)
                                                             <img src="{{ $data->photo ? asset($data->photo):asset('assets/images/noimage.png')}}" alt="No Image">
                                                             @else
-                                                            <img src="{{ $data->photo ? asset('assets/images/users/'.$data->photo):asset('assets/images/noimage.png')}}" alt="{{ __("No Image") }}">                                            
+                                                            <img src="{{ $data->photo ? asset('assets/images/users/'.$data->photo):asset('assets/images/noimage.png')}}" alt="{{ __("No Image") }}">
                                                             @endif
                                                         <a href="javascript:;" class="mybtn1 send" data-email="{{ $data->email }}" data-toggle="modal" data-target="#vendorform">{{ __("Send Message") }}</a>
                                                         </div>
@@ -83,7 +83,7 @@ table#example2 {
                                                             <th>{{ __("Shop Address") }}</th>
                                                             <td>{{ $data->shop_address }}</td>
                                                         </tr>
-                                                        
+
                                                         </table>
                                                         </div>
                                                     </div>
@@ -101,7 +101,7 @@ table#example2 {
                                                         </tr>
                                                         <tr>
                                                             <th>{{ __("Joined") }}</th>
-                                                            <td>{{ $data->created_at->diffForHumans() }}</td>
+                                                            <td>{{ $data->created_at ? $data->created_at->diffForHumans() : 'Date not available' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <th width="35%">{{ __("Shop Details") }}</th>
@@ -112,7 +112,7 @@ table#example2 {
                                                                     @if($data->checkStatus())
                                                                     <a class="badge badge-success verify-link" href="javascript:;">Verified</a>
                                                                     <a class="set-gallery1" href="javascript:;" data-toggle="modal" data-target="#setgallery"><input type="hidden" value="{{ $data->verifies()->where('status','=','Verified')->first()->id }}">(View)</a>
-                                                                    @else 
+                                                                    @else
                                                                     <a class="badge badge-danger verify-link" href="javascript:;">Unverified</a>
                                                                     @endif
                                                             </td>
@@ -145,7 +145,7 @@ table#example2 {
                                                                         <tr>
                                                                         <td><a href="{{ route('front.product', $dt->slug) }}" target="_blank">{{ sprintf("%'.08d",$dt->id) }}</a></td>
                                                                             <td>{{ $dt->type }}</td>
-                                                                            @php 
+                                                                            @php
                                                                             $stck = (string)$dt->stock;
                                                                             if($stck == "0")
                                                                             $stck = "Out Of Stock";
@@ -284,10 +284,10 @@ $('#example2').dataTable( {
 </script>
 
 <script type="text/javascript">
-	
+
 	// Gallery Section Update
-	
-	
+
+
 		$(document).on("click", ".set-gallery1" , function(){
 			var pid = $(this).find('input[type=hidden]').val();
 			$('#pid').val(pid);
@@ -305,10 +305,10 @@ $('#example2').dataTable( {
 						   }
 						  else {
 							$('.selected-image .row').removeClass('justify-content-center');
-							  $('.selected-image .row h3').remove();      
+							  $('.selected-image .row h3').remove();
 							  var arr = $.map(data[1], function(el) {
 							  return el });
-	
+
 							  for(var k in arr)
 							  {
 							$('.selected-image .row').append('<div class="col-sm-6">'+
@@ -318,26 +318,26 @@ $('#example2').dataTable( {
 												'</a>'+
 											'</div>'+
 										  '</div>');
-							  }                         
+							  }
 						   }
-	 
+
 							$('.img-popup').magnificPopup({
 							type: 'image'
 						  });
-	
+
 						 $(document).off('focusin');
-	
+
 						}
-	
-	
+
+
 					  });
 		  });
-	
-	
 
-	
-	// Gallery Section Update Ends	
-	
+
+
+
+	// Gallery Section Update Ends
+
 	</script>
 
 @endsection

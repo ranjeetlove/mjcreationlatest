@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Fronts;
 
 use App\Classes\GeniusMailer;
 use App\Http\Controllers\Controller;
@@ -323,15 +323,15 @@ class FrontendController extends Controller
 
 
 // -------------------------------- FAQ SECTION ----------------------------------------
-	public function faq()
-	{
-        $this->code_image();
-        if(DB::table('generalsettings')->find(1)->is_faq == 0){
-            return redirect()->back();
-        }
-        $faqs =  DB::table('faqs')->orderBy('id','desc')->get();
-		return view('front.faq',compact('faqs'));
-	}
+	// public function faq()
+	// {
+    //     $this->code_image();
+    //     if(DB::table('generalsettings')->find(1)->is_faq == 0){
+    //         return redirect()->back();
+    //     }
+    //     $faqs =  DB::table('faqs')->orderBy('id','desc')->get();
+	// 	return view('front.faq',compact('faqs'));
+	// }
 // -------------------------------- FAQ SECTION ENDS----------------------------------------
 
 
@@ -351,15 +351,15 @@ class FrontendController extends Controller
 
 
 // -------------------------------- CONTACT SECTION ----------------------------------------
-	public function contact()
-	{
-        $this->code_image();
-        if(DB::table('generalsettings')->find(1)->is_contact== 0){
-            return redirect()->back();
-        }
-        $ps =  DB::table('pagesettings')->where('id','=',1)->first();
-		return view('front.contact',compact('ps'));
-	}
+	// public function contact()
+	// {
+    //     $this->code_image();
+    //     if(DB::table('generalsettings')->find(1)->is_contact== 0){
+    //         return redirect()->back();
+    //     }
+    //     $ps =  DB::table('pagesettings')->where('id','=',1)->first();
+	// 	return view('front.contact',compact('ps'));
+	// }
 
 
     //Send email to admin

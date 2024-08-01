@@ -84,4 +84,50 @@ class FrontendController extends Controller
                 break;
         }
     }
+
+	public function faq()
+	{
+
+		return view('front.faq');
+	}
+	public function profile()
+	{
+
+		return view('front.profile');
+	}
+
+    public function contact()
+	{
+
+		return view('front.contact');
+	}
+
+    public function checkout()
+	{
+
+		return view('front.checkout');
+	}
+
+    public function orders()
+	{
+
+		return view('front.orders');
+	}
+    public function ordersDetail()
+	{
+
+		return view('front.order-details');
+	}
+    public function vendorRegistration()
+	{
+
+		return view('front.vendor-registration');
+	}
+
+    public function myAccount()
+	{
+
+		return view('front.my-account');
+	}
+
 }
