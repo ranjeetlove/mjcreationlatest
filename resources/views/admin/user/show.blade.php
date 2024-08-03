@@ -44,11 +44,11 @@ table#example2 {
                                                     <div class="col-md-4">
                                                         <div class="user-image">
                                                             @if($data->is_provider == 1)
-                                                            <img src="{{ $data->photo ? asset($data->photo):asset('assets/images/'.$gs->user_image)}}" alt="No Image">
+                                                            <img src="{{ $data->photo ? asset($data->photo):asset('assets/images/noimage.png')}}" alt="No Image">
                                                             @else
-                                                            <img src="{{ $data->photo ? asset('assets/images/users/'.$data->photo):asset('assets/images/'.$gs->user_image)}}" alt="No Image">                                            
+                                                            <img src="{{ $data->photo ? asset('assets/images/users/'.$data->photo):asset('assets/images/noimage.png')}}" alt="No Image">
+
                                                             @endif
-                                                        <a href="javascript:;" class="mybtn1 send" data-email="{{ $data->email }}" data-toggle="modal" data-target="#vendorform">{{ __("Send Message") }}</a>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -81,7 +81,7 @@ table#example2 {
                                                     <div class="col-md-4">
                                                     <div class="table-responsive show-table">
                                                     <table class="table">
-                                                            
+
                                                             @if($data->city != null)
                                                             <tr>
                                                                 <th>{{ __("City") }}</th>
@@ -138,7 +138,7 @@ table#example2 {
                                                                             </td>
                                                                         </tr>
                                                                         @endforeach
-                                                                        
+
                                                                     </tbody>
                                                                 </table>
                                                         </div>

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use Datatables;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +8,7 @@ use App\Models\User;
 use App\Models\Withdraw;
 use App\Models\Currency;
 use Illuminate\Support\Facades\Input;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -31,8 +30,8 @@ class UserController extends Controller
                                     $ban = '<select class="process select droplinks '.$class.'">'.
                 '<option data-val="0" value="'. route('admin-user-ban',['id1' => $data->id, 'id2' => 1]).'" '.$s.'>Block</option>'.
                 '<option data-val="1" value="'. route('admin-user-ban',['id1' => $data->id, 'id2' => 0]).'" '.$ns.'>UnBlock</option></select>';
-                                    return '<div class="action-list"><a href="' . route('admin-user-show',$data->id) . '" > <i class="fas fa-eye"></i> Details</a><a data-href="' . route('admin-user-edit',$data->id) . '" class="edit" data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i>Edit</a><a href="javascript:;" class="send" data-email="'. $data->email .'" data-toggle="modal" data-target="#vendorform"><i class="fas fa-envelope"></i> Send</a>'.$ban.'<a href="javascript:;" data-href="' . route('admin-user-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i></a></div>';
-                                }) 
+                                    return '<div class="action-list"><a href="' . route('admin-user-show',$data->id) . '" > <i class="fas fa-eye"></i> Details</a><a data-href="' . route('admin-user-edit',$data->id) . '" class="edit" data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i>Edit</a>'.$ban.'<a href="javascript:;" data-href="' . route('admin-user-delete',$data->id) . '" data-toggle="modal" data-target="#confirm-delete" class="delete"><i class="fas fa-trash-alt"></i></a></div>';
+                                })
                                 ->rawColumns(['action'])
                                 ->toJson(); //--- Returning Json Data To Client Side
         }
@@ -45,7 +44,7 @@ class UserController extends Controller
 
         //*** GET Request
         public function image()
-        {  
+        {
             return view('admin.generalsetting.user_image');
         }
 
@@ -65,7 +64,7 @@ class UserController extends Controller
 
         }
 
-        //*** GET Request    
+        //*** GET Request
         public function edit($id)
         {
             $data = User::findOrFail($id);
@@ -80,8 +79,8 @@ class UserController extends Controller
                    'photo' => 'mimes:jpeg,jpg,png,svg',
                     ];
 
-            $validator = Validator::make(Input::all(), $rules);
-            
+            $validator = Validator::make($request->all(), $rules);
+
             if ($validator->fails()) {
               return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
             }
@@ -103,7 +102,7 @@ class UserController extends Controller
             }
             $user->update($data);
             $msg = 'Customer Information Updated Successfully.';
-            return response()->json($msg);   
+            return response()->json($msg);
         }
 
         //*** GET Request Delete
@@ -134,7 +133,7 @@ class UserController extends Controller
                 $gal->delete();
             }
         }
-        
+
 
         if($user->ratings->count() > 0)
         {
@@ -304,7 +303,7 @@ class UserController extends Controller
 // PRODUCT ENDS
 
         }
-// OTHER SECTION 
+// OTHER SECTION
 
 
 
@@ -371,20 +370,20 @@ class UserController extends Controller
             //If Photo Doesn't Exist
             if($user->photo == null){
                 $user->delete();
-                //--- Redirect Section     
+                //--- Redirect Section
                 $msg = 'Data Deleted Successfully.';
-                return response()->json($msg);      
-                //--- Redirect Section Ends 
+                return response()->json($msg);
+                //--- Redirect Section Ends
             }
             //If Photo Exist
             if (file_exists(public_path().'/assets/images/users/'.$user->photo)) {
                     unlink(public_path().'/assets/images/users/'.$user->photo);
                  }
             $user->delete();
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Data Deleted Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends    
+            return response()->json($msg);
+            //--- Redirect Section Ends
         }
 
         //*** JSON Request
@@ -396,20 +395,20 @@ class UserController extends Controller
                                 ->addColumn('email', function(Withdraw $data) {
                                     $email = $data->user->email;
                                     return $email;
-                                }) 
+                                })
                                 ->addColumn('phone', function(Withdraw $data) {
                                     $phone = $data->user->phone;
                                     return $phone;
-                                }) 
+                                })
                                 ->editColumn('status', function(Withdraw $data) {
                                     $status = ucfirst($data->status);
                                     return $status;
-                                }) 
+                                })
                                 ->editColumn('amount', function(Withdraw $data) {
                                     $sign = Currency::where('is_default','=',1)->first();
                                     $amount = $sign->sign.round($data->amount * $sign->value , 2);
                                     return $amount;
-                                }) 
+                                })
                                 ->addColumn('action', function(Withdraw $data) {
                                     $action = '<div class="action-list"><a data-href="' . route('admin-withdraw-show',$data->id) . '" class="view details-width" data-toggle="modal" data-target="#modal1"> <i class="fas fa-eye"></i> Details</a>';
                                     if($data->status == "pending") {
@@ -417,7 +416,7 @@ class UserController extends Controller
                                     }
                                     $action .= '</div>';
                                     return $action;
-                                }) 
+                                })
                                 ->rawColumns(['name','action'])
                                 ->toJson(); //--- Returning Json Data To Client Side
         }
@@ -428,7 +427,7 @@ class UserController extends Controller
             return view('admin.user.withdraws');
         }
 
-        //*** GET Request       
+        //*** GET Request
         public function withdrawdetails($id)
         {
             $sign = Currency::where('is_default','=',1)->first();
@@ -436,19 +435,19 @@ class UserController extends Controller
             return view('admin.user.withdraw-details',compact('withdraw','sign'));
         }
 
-        //*** GET Request   
+        //*** GET Request
         public function accept($id)
         {
             $withdraw = Withdraw::findOrFail($id);
             $data['status'] = "completed";
             $withdraw->update($data);
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Withdraw Accepted Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends   
+            return response()->json($msg);
+            //--- Redirect Section Ends
         }
 
-        //*** GET Request   
+        //*** GET Request
         public function reject($id)
         {
             $withdraw = Withdraw::findOrFail($id);
@@ -457,10 +456,10 @@ class UserController extends Controller
             $account->update();
             $data['status'] = "rejected";
             $withdraw->update($data);
-            //--- Redirect Section     
+            //--- Redirect Section
             $msg = 'Withdraw Rejected Successfully.';
-            return response()->json($msg);      
-            //--- Redirect Section Ends   
+            return response()->json($msg);
+            //--- Redirect Section Ends
         }
 
 }
