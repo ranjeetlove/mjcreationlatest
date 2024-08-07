@@ -31,7 +31,7 @@ class FrontendController extends Controller
 	    return view('website.home',compact('ps','sliders','banner','feature_products','datalist','datalistafter','mostViewedProducts'));
 	}
 
-    public function homedetail($id)
+    public function homedetail($id) 
     {
 
         $product = Product::findOrFail($id);
@@ -116,7 +116,7 @@ class FrontendController extends Controller
     public function ordersDetail()
 	{
 
-		return view('front.order-details');
+		return view('front.order-details'); 
 	}
     public function vendorRegistration()
 	{
